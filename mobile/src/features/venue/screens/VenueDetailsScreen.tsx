@@ -12,12 +12,15 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamList } from '../../../core/navigation/navigation.types';
 import { RootState, AppDispatch } from '../../../core/store/store';
 import { fetchVenueDetailWithCourts, clearSelectedVenue } from '../slices/venueSlice';
+import { BookingTypeModal } from '../components/BookingTypeModal';
 import styles from '../styles/VenueDetailsScreenStyles';
 
+type VenueDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'VenueDetails'>;
 type VenueDetailsRouteProp = RouteProp<RootStackParamList, 'VenueDetails'>;
 
 // =============================================================================
@@ -51,7 +54,7 @@ const TABS = ['Thông tin', 'Dịch vụ', 'Hình ảnh', 'Điều khoản & quy
 // COMPONENT
 // =============================================================================
 export const VenueDetailsScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<VenueDetailsNavigationProp>();
   const route = useRoute<VenueDetailsRouteProp>();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -65,6 +68,7 @@ export const VenueDetailsScreen = () => {
   // Local state
   const [activeTab, setActiveTab] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   // =============================================================================
   // Gọi API lấy chi tiết venue khi mount
@@ -121,9 +125,26 @@ export const VenueDetailsScreen = () => {
   };
 
   const handleBooking = () => {
+    setShowBookingModal(true);
+  };
+
+  const handleCloseBookingModal = () => {
+    setShowBookingModal(false);
+  };
+
+  const handleDayBooking = () => {
+    setShowBookingModal(false);
+    navigation.navigate('DayBooking', {
+      venueId,
+      venueName: venue.name,
+    });
+  };
+
+  const handleEventBooking = () => {
+    setShowBookingModal(false);
     Alert.alert(
-      'Đặt lịch',
-      `Bạn muốn đặt lịch tại ${venue.name}. Hệ thống đặt sân đang được chuẩn bị.`,
+      'Đặt lịch sự kiện',
+      `Đặt sân cho giải đấu hoặc sự kiện tại ${venue.name}. Chức năng đang được phát triển.`,
     );
   };
 
@@ -388,6 +409,14 @@ export const VenueDetailsScreen = () => {
           <Text style={styles.bookingButtonText}>Đặt lịch</Text>
         </TouchableOpacity>
       </View>
+
+      {/* ======== BOOKING TYPE MODAL ======== */}
+      <BookingTypeModal
+        visible={showBookingModal}
+        onClose={handleCloseBookingModal}
+        onSelectDayBooking={handleDayBooking}
+        onSelectEventBooking={handleEventBooking}
+      />
     </View>
   );
 };

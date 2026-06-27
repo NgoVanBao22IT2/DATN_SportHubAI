@@ -11,6 +11,8 @@ import { VerifyEmailScreen } from '../../features/auth/screens/VerifyEmailScreen
 import { ResetPasswordScreen } from '../../features/auth/screens/ResetPasswordScreen';
 import { HomeScreen } from '../../features/home/screens/HomeScreen';
 import { VenueDetailsScreen } from '../../features/venue/screens/VenueDetailsScreen';
+import { DayBookingScreen } from '../../features/booking/screens/DayBookingScreen';
+import { BookingConfirmScreen } from '../../features/booking/screens/BookingConfirmScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -131,6 +133,8 @@ export const AppNavigator = () => {
           <Stack.Screen name="OwnerApp" component={OwnerTabNavigator} />
           <Stack.Screen name="BookingDetails" component={BookingDetailsScreen} />
           <Stack.Screen name="VenueDetails" component={VenueDetailsScreen} />
+          <Stack.Screen name="DayBooking" component={DayBookingScreen} />
+          <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
         </>
       ) : (
         // Luồng người dùng bình thường (User) hoặc Admin
@@ -138,6 +142,8 @@ export const AppNavigator = () => {
           <Stack.Screen name="App" component={AppTabNavigator} />
           <Stack.Screen name="BookingDetails" component={BookingDetailsScreen} />
           <Stack.Screen name="VenueDetails" component={VenueDetailsScreen} />
+          <Stack.Screen name="DayBooking" component={DayBookingScreen} />
+          <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
         </>
       )}
     </Stack.Navigator>

@@ -32,6 +32,18 @@ export type RootStackParamList = {
   App: NavigatorScreenParams<AppTabParamList>;
   OwnerApp: NavigatorScreenParams<OwnerTabParamList>;
   VenueDetails: { venueId: string };
+  DayBooking: { venueId: string; venueName: string };
+  Search: { initialQuery?: string };
+  BookingConfirm: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+  };
   BookingDetails: { bookingId: string };
 };
 

@@ -5,13 +5,16 @@ export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
   ForgotPassword: { email?: string } | undefined;
+  VerifyEmail: { email: string; flow?: 'register' | 'forgot_password' };
+  ResetPassword: { email: string; code: string };
 };
 
 // Khai báo các màn hình trong Main App Tab Stack (dành cho User)
 export type AppTabParamList = {
   HomeTab: undefined;
-  BookingsTab: undefined;
-  NotificationsTab: undefined;
+  MapTab: undefined;
+  ExploreTab: undefined;
+  FeaturedTab: undefined;
   ProfileTab: undefined;
 };
 

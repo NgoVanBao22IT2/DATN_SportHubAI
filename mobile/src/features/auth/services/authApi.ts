@@ -21,6 +21,24 @@ export const authApi = {
     return response.data;
   },
 
+  // Xác thực Email bằng mã OTP
+  verifyEmail: async (email: string, code: string) => {
+    const response = await apiClient.post('/auth/verify-email', { email, code });
+    return response.data;
+  },
+
+  // Gửi lại mã OTP xác thực
+  resendVerificationCode: async (email: string) => {
+    const response = await apiClient.post('/auth/resend-verification', { email });
+    return response.data;
+  },
+
+  // Đặt lại mật khẩu
+  resetPassword: async (payload: { email: string; code: string; password?: string; newPassword?: string }) => {
+    const response = await apiClient.post('/auth/reset-password', payload);
+    return response.data;
+  },
+
   // Đăng xuất từ phía máy chủ (huỷ Refresh Token trong DB)
   revokeSession: async (refreshToken: string) => {
     const response = await apiClient.post('/auth/logout', { refreshToken });

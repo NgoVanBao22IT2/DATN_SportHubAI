@@ -1,0 +1,7 @@
+# Module Venue chứa các thư mục con:
+# - controllers/ : Xử lý request tìm kiếm sân, xem chi tiết
+# - services/ : Nghiệp vụ quản lý sân, tích hợp vị trí địa lý Google Maps
+# - repositories/ : Giao tiếp với bảng Venues, Courts
+# - validators/ : Validate dữ liệu tạo sân, cập nhật sân
+# - dtos/ : Venue Request, Venue Response DTO
+# - routes/ : Định tuyến API riêng cho module

@@ -1,0 +1,7 @@
+# Module Booking chứa các thư mục con:
+# - controllers/ : Nhận request đặt sân, huỷ đặt, webhook thanh toán
+# - services/ : Nghiệp vụ đặt lịch, kiểm tra trùng slot, tính giá, gọi MoMo
+# - repositories/ : Giao tiếp với bảng Bookings, BookedSlots
+# - validators/ : Validate dữ liệu đặt (mã sân, ngày, khung giờ)
+# - dtos/ : Booking Request, Booking Response DTO
+# - routes/ : Định tuyến API riêng cho module

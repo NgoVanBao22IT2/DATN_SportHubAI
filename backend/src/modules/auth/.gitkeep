@@ -1,0 +1,7 @@
+# Module Auth chứa các thư mục con:
+# - controllers/ : Xử lý request, HTTP status code
+# - services/ : Nghiệp vụ xác thực, hashing, JWT signing
+# - repositories/ : Giao tiếp DB (User, RefreshToken)
+# - validators/ : Validate payload (Zod schema)
+# - dtos/ : Định dạng dữ liệu nhập xuất (Data Transfer Objects)
+# - routes/ : Định tuyến API riêng cho module

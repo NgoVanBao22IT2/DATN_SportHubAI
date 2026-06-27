@@ -1,0 +1,2 @@
+# Thư mục chứa các component nhỏ lẻ thuộc về module Venue (ví dụ: VenueCard, CourtSelector, TimeSlotPicker)
+# Tuân thủ nguyên tắc: Không vẽ UI/UX tại đây khi thiết kế kiến trúc

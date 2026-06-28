@@ -57,3 +57,10 @@ export class ConflictError extends AppError {
     super(409, errorCode, message, true);
   }
 }
+
+// 503 Service Unavailable
+export class ServiceUnavailableError extends AppError {
+  constructor(message = 'Dịch vụ hiện không khả dụng', errorCode = 'SERVICE_UNAVAILABLE', details: any = null) {
+    super(503, errorCode, message, true, details);
+  }
+}

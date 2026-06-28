@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'ax
 import * as SecureStore from 'expo-secure-store';
 
 const API_TIMEOUT = 10000;
-const BASE_URL = 'https://api.arenareserve.local/api/v1'; // Sẽ cấu hình qua biến môi trường sau
+const BASE_URL = 'http://192.168.1.99:5000/api/v1'; // Sẽ cấu hình qua biến môi trường sau
 
 export const SECURE_STORE_KEYS = {
   ACCESS_TOKEN: 'access_token',

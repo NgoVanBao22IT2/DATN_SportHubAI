@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
 const API_TIMEOUT = 10000;
-const BASE_URL = 'https://api.arenareserve.local/api/v1'; // Có thể dùng import.meta.env.VITE_API_URL
+const BASE_URL = 'https://api.sporthubai.local/api/v1'; // Có thể dùng import.meta.env.VITE_API_URL
 
 export const STORAGE_KEYS = {
   ACCESS_TOKEN: 'access_token',

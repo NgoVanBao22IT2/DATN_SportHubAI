@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ArenaReserve",
-    "slug": "arena-reserve",
+    "name": "SportHubAI",
+    "slug": "sporthubai",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,14 +13,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.arenareserve.app"
+      "bundleIdentifier": "com.sporthubai.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#121212"
       },
-      "package": "com.arenareserve.app"
+      "package": "com.sporthubai.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

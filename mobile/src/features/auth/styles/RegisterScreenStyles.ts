@@ -31,8 +31,6 @@ export const styles = StyleSheet.create({
   logoIcon: {
     width: 36,
     height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(6, 182, 212, 0.15)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,

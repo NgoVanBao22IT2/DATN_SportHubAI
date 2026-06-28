@@ -10,15 +10,27 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CompositeNavigationProp } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../core/navigation/navigation.types';
+import { useSelector } from 'react-redux';
+import { AppTabParamList, RootStackParamList } from '../../../core/navigation/navigation.types';
+import { RootState } from '../../../core/store/store';
 import styles from '../styles/HomeScreenStyles';
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Auth'>;
+const DEFAULT_AVATAR = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop';
+
+type HomeScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<AppTabParamList, 'HomeTab'>,
+  StackNavigationProp<RootStackParamList>
+>;
 
 export const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const displayName = user?.fullName?.trim() || 'Người dùng';
+  const avatarUrl = user?.avatarUrl || DEFAULT_AVATAR;
 
   // States
   const [searchQuery, setSearchQuery] = useState('');
@@ -64,16 +76,19 @@ export const HomeScreen = () => {
 
   // Actions
   const handleBannerPress = () => {
-    Alert.alert('Khuyến mãi', 'Chương trình ưu đãi giảm giá 20% tự động áp dụng khi đặt sân Pickleball trong tuần này!');
+    // Navigate to Search pre-filled for promotional category
+    navigation.navigate('Search', { initialQuery: 'Pickleball' });
   };
 
   const handleBookPress = (venue: typeof featuredVenues[0]) => {
-    Alert.alert('Đặt lịch sân', `Bạn chọn đặt lịch tại: ${venue.name}. Hệ thống đặt sân đang được chuẩn bị.`);
+    // Open DayBooking flow for selected venue
+    navigation.navigate('DayBooking', { venueId: venue.id, venueName: venue.name });
   };
 
   const handleSearch = () => {
-    if (searchQuery.trim()) {
-      Alert.alert('Tìm kiếm', `Đang tìm kiếm thông tin cho: "${searchQuery}"`);
+    const q = searchQuery.trim();
+    if (q) {
+      navigation.navigate('Search', { initialQuery: q });
     }
   };
 
@@ -82,24 +97,43 @@ export const HomeScreen = () => {
       {/* Header Top Bar */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Ionicons name="tennisball" size={24} color="#ffffff" />
+          <Image
+            source={require('../../../../assets/image.png')}
+            style={styles.logoIcon}
+            resizeMode="contain"
+          />
           <Text style={styles.logoText}>SportHub</Text>
         </View>
 
         <View style={styles.headerRight}>
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => navigation.navigate('Auth', { screen: 'Login' })}
-          >
-            <Text style={styles.loginButtonText}>Đăng nhập</Text>
-          </TouchableOpacity>
+          {isAuthenticated ? (
+            <TouchableOpacity
+              style={styles.userProfileButton}
+              onPress={() => navigation.navigate('ProfileTab')}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.userName} numberOfLines={1}>
+                {displayName}
+              </Text>
+              <Image source={{ uri: avatarUrl }} style={styles.userAvatar} />
+            </TouchableOpacity>
+          ) : (
+            <>
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={() => navigation.navigate('Auth', { screen: 'Login' })}
+              >
+                <Text style={styles.loginButtonText}>Đăng nhập</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.registerButton}
-            onPress={() => navigation.navigate('Auth', { screen: 'Register' })}
-          >
-            <Text style={styles.registerButtonText}>Đăng ký</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.registerButton}
+                onPress={() => navigation.navigate('Auth', { screen: 'Register' })}
+              >
+                <Text style={styles.registerButtonText}>Đăng ký</Text>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </View>
 
@@ -135,7 +169,11 @@ export const HomeScreen = () => {
                 <TouchableOpacity
                   key={index}
                   style={[styles.tagPill, isActive && styles.tagPillActive]}
-                  onPress={() => setSelectedTag(index)}
+                  onPress={() => {
+                    setSelectedTag(index);
+                    // navigate to Search with the tag text
+                    navigation.navigate('Search', { initialQuery: tag });
+                  }}
                 >
                   <Ionicons
                     name="location-outline"
@@ -201,7 +239,11 @@ export const HomeScreen = () => {
           {/* Venues Card List */}
           <View style={styles.venuesList}>
             {featuredVenues.map((venue) => (
-              <View key={venue.id} style={styles.venueCard}>
+              <TouchableOpacity
+                key={venue.id}
+                style={styles.venueCard}
+                onPress={() => navigation.navigate('VenueDetails', { venueId: venue.id })}
+              >
                 <Image source={{ uri: venue.image }} style={styles.venueImage} />
                 <View style={styles.venueInfo}>
                   <View style={styles.venueNameRow}>
@@ -225,7 +267,7 @@ export const HomeScreen = () => {
                     <Text style={styles.bookButtonText}>Đặt lịch</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>

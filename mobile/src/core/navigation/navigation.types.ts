@@ -32,8 +32,18 @@ export type RootStackParamList = {
   App: NavigatorScreenParams<AppTabParamList>;
   OwnerApp: NavigatorScreenParams<OwnerTabParamList>;
   VenueDetails: { venueId: string };
-  DayBooking: { venueId: string; venueName: string };
+  DayBooking: {
+    venueId: string;
+    venueName: string;
+    venueAddress?: string;
+    rating?: number;
+    reviewCount?: number;
+    sportType?: string;
+    courtCount?: number;
+    imageUrl?: string;
+  };
   Search: { initialQuery?: string };
+  ProfileEdit: undefined;
   BookingConfirm: {
     venueId: string;
     venueName: string;
@@ -45,6 +55,16 @@ export type RootStackParamList = {
     totalPrice: number;
   };
   BookingDetails: { bookingId: string };
+  VenuePrice: {
+    venueId: string;
+    venueName?: string;
+    venueAddress?: string;
+    rating?: number;
+    reviewCount?: number;
+    sportType?: string;
+    courtCount?: number;
+    imageUrl?: string;
+  };
 };
 
 // Mở rộng namespace để sử dụng hook navigation một cách typesafe trong toàn dự án

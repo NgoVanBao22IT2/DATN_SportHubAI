@@ -13,7 +13,9 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 import { RootStackParamList } from '../../../core/navigation/navigation.types';
+import { RootState } from '../../../core/store/store';
 import styles from '../styles/BookingConfirmScreenStyles';
 
 type BookingConfirmRouteProp = RouteProp<RootStackParamList, 'BookingConfirm'>;
@@ -39,6 +41,7 @@ const formatHours = (h: number): string => {
 export const BookingConfirmScreen = () => {
   const navigation = useNavigation<BookingConfirmNavProp>();
   const route = useRoute<BookingConfirmRouteProp>();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   const {
     venueName,
@@ -190,25 +193,27 @@ export const BookingConfirmScreen = () => {
         </View>
 
         {/* ======== PROMO CARD ======== */}
-        <View style={styles.promoCard}>
-          <Text style={styles.promoText}>Đăng nhập để có thể sử dụng ưu đãi</Text>
-          <View style={styles.promoButtonRow}>
-            <TouchableOpacity
-              style={styles.promoButtonLogin}
-              onPress={handleLogin}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.promoButtonLoginText}>ĐĂNG NHẬP</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.promoButtonRegister}
-              onPress={handleRegister}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.promoButtonRegisterText}>ĐĂNG KÝ</Text>
-            </TouchableOpacity>
+        {!isAuthenticated && (
+          <View style={styles.promoCard}>
+            <Text style={styles.promoText}>Đăng nhập để có thể sử dụng ưu đãi</Text>
+            <View style={styles.promoButtonRow}>
+              <TouchableOpacity
+                style={styles.promoButtonLogin}
+                onPress={handleLogin}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.promoButtonLoginText}>ĐĂNG NHẬP</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.promoButtonRegister}
+                onPress={handleRegister}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.promoButtonRegisterText}>ĐĂNG KÝ</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        )}
 
         {/* ======== FORM: THÔNG TIN NGƯỜI ĐẶT ======== */}
         <View style={styles.formCard}>

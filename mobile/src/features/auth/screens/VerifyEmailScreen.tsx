@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  Image,
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
@@ -35,7 +36,7 @@ export const VerifyEmailScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Timer State (2 phút = 120 giây)
   const [timer, setTimer] = useState(120);
   const [canResend, setCanResend] = useState(false);
@@ -118,7 +119,7 @@ export const VerifyEmailScreen = () => {
   const handleVerify = async () => {
     setError(null);
     const code = otp.join('');
-    
+
     if (code.length < 6) {
       setError('Vui lòng nhập đầy đủ mã OTP 6 chữ số.');
       return;
@@ -128,7 +129,7 @@ export const VerifyEmailScreen = () => {
     try {
       await authApi.verifyEmail(email, code);
       setIsLoading(false);
-      
+
       Alert.alert(
         'Xác nhận thành công',
         'Tài khoản của bạn đã được xác thực thành công.',
@@ -166,9 +167,11 @@ export const VerifyEmailScreen = () => {
             {/* Header */}
             <View style={styles.header}>
               <View style={styles.logoRow}>
-                <View style={styles.logoIcon}>
-                  <Ionicons name="tennisball" size={24} color="#06b6d4" />
-                </View>
+                <Image
+                  source={require('../../../../assets/image.png')}
+                  style={styles.logoIcon}
+                  resizeMode="contain"
+                />
                 <Text style={styles.logoText}>SPORTHUB</Text>
                 <TouchableOpacity style={styles.langBtn}>
                   <Text style={styles.langBtnText}>VN</Text>
@@ -188,7 +191,7 @@ export const VerifyEmailScreen = () => {
                 {otp.map((value, index) => (
                   <TextInput
                     key={index}
-                    ref={(el) => (pinRefs.current[index] = el)}
+                    ref={(el) => { pinRefs.current[index] = el; }}
                     style={[
                       styles.otpInput,
                       focusedIndex === index && styles.otpInputFocused,

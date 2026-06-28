@@ -72,6 +72,27 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
   },
+  userProfileButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    maxWidth: 160,
+  },
+  userName: {
+    flexShrink: 1,
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: '700',
+    textAlign: 'right',
+  },
+  userAvatar: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    backgroundColor: '#e5e7eb',
+  },
   scrollContent: {
     paddingBottom: 32,
   },

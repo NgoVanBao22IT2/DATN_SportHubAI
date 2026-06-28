@@ -38,25 +38,25 @@ type SlotStatus = 'empty' | 'booked' | 'locked' | 'event';
 // Được tạo sẵn, khớp với mockup trong hình ảnh thiết kế
 const MOCK_SLOT_STATUS: SlotStatus[][] = [
   // C.Lông 1: slot 19:30 bị đặt
-  ['empty', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 2: 19:30 → 20:30 bị đặt
-  ['empty', 'booked', 'booked', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 3: 20:00 bị đặt, 20:30 bị đặt
-  ['empty', 'empty', 'booked', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 4: 20:00 bị đặt
-  ['empty', 'empty', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 5: 20:30 bị đặt
-  ['empty', 'empty', 'empty', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 6: tất cả trống
   ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 7: 20:30 bị đặt
-  ['empty', 'empty', 'empty', 'booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
   // C.Lông 8: 19:00 bị đặt
-  ['booked', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+  ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
 ];
 
 // Giá mỗi slot 30 phút (VNĐ)
-const PRICE_PER_SLOT = 80_000;
+const PRICE_PER_SLOT = 30_000;
 
 // Tạo key cho slot được chọn
 const makeSlotKey = (courtIdx: number, timeIdx: number) => `${courtIdx}-${timeIdx}`;
@@ -67,7 +67,16 @@ const makeSlotKey = (courtIdx: number, timeIdx: number) => `${courtIdx}-${timeId
 export const DayBookingScreen = () => {
   const navigation = useNavigation<DayBookingNavProp>();
   const route = useRoute<DayBookingRouteProp>();
-  const { venueName } = route.params;
+  const {
+    venueId,
+    venueName,
+    venueAddress,
+    rating,
+    reviewCount,
+    sportType,
+    courtCount,
+    imageUrl,
+  } = route.params;
 
   // Ngày hiện tại (định dạng DD/MM/YYYY)
   const today = new Date();
@@ -98,6 +107,19 @@ export const DayBookingScreen = () => {
   // Handlers
   // =============================================================================
   const handleBack = () => navigation.goBack();
+
+  const handleViewVenuePrice = () => {
+    navigation.navigate('VenuePrice', {
+      venueId,
+      venueName,
+      venueAddress,
+      rating,
+      reviewCount,
+      sportType,
+      courtCount: courtCount ?? COURTS.length,
+      imageUrl,
+    });
+  };
 
   const handleSlotPress = (courtIdx: number, timeIdx: number) => {
     const status = MOCK_SLOT_STATUS[courtIdx][timeIdx];
@@ -222,11 +244,7 @@ export const DayBookingScreen = () => {
 
           {/* Link xem sân + Date badge */}
           <View style={styles.legendSubRow}>
-            <TouchableOpacity
-              onPress={() =>
-                Alert.alert('Xem sân', 'Trang xem sân & bảng giá đang được cập nhật.')
-              }
-            >
+            <TouchableOpacity onPress={handleViewVenuePrice} activeOpacity={0.8}>
               <Text style={styles.venueLink}>Xem sân & bảng giá</Text>
             </TouchableOpacity>
 

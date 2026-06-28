@@ -15,9 +15,17 @@ const bootstrap = async () => {
   // 1. Kết nối Cơ sở dữ liệu MySQL
   await connectDatabase();
 
+  // Tự động đồng bộ các bảng cơ sở dữ liệu
+  try {
+    await sequelize.sync({ alter: true });
+    logger.info('Đã tự động đồng bộ hóa cấu trúc bảng dữ liệu (Sequelize sync) thành công.');
+  } catch (syncError) {
+    logger.error('Lỗi khi đồng bộ cấu trúc bảng dữ liệu:', syncError);
+  }
+
   // 2. Lắng nghe yêu cầu HTTP
   server.listen(PORT, () => {
-    logger.info(`Máy chủ ArenaReserve Backend đang hoạt động trên Port: ${PORT} ở chế độ [${process.env.NODE_ENV}]`);
+    logger.info(`Máy chủ SportHubAI Backend đang hoạt động trên Port: ${PORT} ở chế độ [${process.env.NODE_ENV}]`);
   });
 };
 

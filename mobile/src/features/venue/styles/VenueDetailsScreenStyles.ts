@@ -154,6 +154,10 @@ export const styles = StyleSheet.create({
     marginBottom: 6,
     gap: 12,
   },
+  logoIcon: {
+    width: 22,
+    height: 35,
+  },
   venueLogoBox: {
     width: 48,
     height: 48,

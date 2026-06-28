@@ -137,6 +137,12 @@ export const VenueDetailsScreen = () => {
     navigation.navigate('DayBooking', {
       venueId,
       venueName: venue.name,
+      venueAddress: venue.address,
+      rating: venue.rating,
+      reviewCount: 128,
+      sportType: venue.category,
+      courtCount: 6,
+      imageUrl: venue.heroImage,
     });
   };
 
@@ -174,9 +180,13 @@ export const VenueDetailsScreen = () => {
       {/* ======== HEADER TOP BAR ======== */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Ionicons name="tennisball" size={24} color="#ffffff" />
-          <Text style={styles.logoText}>SportHub</Text>
-        </View>
+                  <Image
+                    source={require('../../../../assets/image.png')}
+                    style={styles.logoIcon}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.logoText}>SportHub</Text>
+                </View>
         <TouchableOpacity style={styles.headerSearchButton}>
           <Ionicons name="search-outline" size={22} color="#ffffff" />
         </TouchableOpacity>

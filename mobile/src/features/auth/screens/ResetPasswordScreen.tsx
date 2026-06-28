@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  Image,
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
@@ -34,7 +35,7 @@ export const ResetPasswordScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -113,9 +114,11 @@ export const ResetPasswordScreen = () => {
             {/* Header */}
             <View style={styles.header}>
               <View style={styles.logoRow}>
-                <View style={styles.logoIcon}>
-                  <Ionicons name="tennisball" size={24} color="#06b6d4" />
-                </View>
+                <Image
+                  source={require('../../../../assets/image.png')}
+                  style={styles.logoIcon}
+                  resizeMode="contain"
+                />
                 <Text style={styles.logoText}>SPORTHUB</Text>
                 <TouchableOpacity style={styles.langBtn}>
                   <Text style={styles.langBtnText}>VN</Text>

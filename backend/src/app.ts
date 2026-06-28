@@ -5,6 +5,10 @@ import rateLimit from 'express-rate-limit';
 import errorHandler from './common/middlewares/errorHandler';
 import { NotFoundError } from './common/errors/AppError';
 
+import authRoutes from './modules/auth/routes/authRoutes';
+import venueRoutes from './modules/venue/routes/venueRoutes';
+import bookingRoutes from './modules/booking/routes/bookingRoutes';
+
 const app: Application = express();
 
 // ==========================================
@@ -46,6 +50,11 @@ app.use('/api/', globalRateLimiter);
 // ==========================================
 // ĐỊNH TUYẾN (ROUTES)
 // ==========================================
+
+// Đăng ký các router nghiệp vụ
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/venues', venueRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
 
 // Endpoint kiểm tra sức khoẻ server (Health Check)
 app.use('/health', (req: Request, res: Response) => {

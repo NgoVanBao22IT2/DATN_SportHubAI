@@ -11,8 +11,11 @@ import { VerifyEmailScreen } from '../../features/auth/screens/VerifyEmailScreen
 import { ResetPasswordScreen } from '../../features/auth/screens/ResetPasswordScreen';
 import { HomeScreen } from '../../features/home/screens/HomeScreen';
 import { VenueDetailsScreen } from '../../features/venue/screens/VenueDetailsScreen';
+import { VenuePriceScreen } from '../../features/venue/screens/VenuePriceScreen';
 import { DayBookingScreen } from '../../features/booking/screens/DayBookingScreen';
 import { BookingConfirmScreen } from '../../features/booking/screens/BookingConfirmScreen';
+import { ProfileScreen } from '../../features/profile/screens/ProfileScreen';
+import EditProfileScreen from '../../features/profile/screens/EditProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -29,7 +32,6 @@ const PlaceholderScreen = (name: string) => () => null;
 
 const BookingsScreen = PlaceholderScreen('BookingsScreen');
 const NotificationsScreen = PlaceholderScreen('NotificationsScreen');
-const ProfileScreen = PlaceholderScreen('ProfileScreen');
 const MapScreen = PlaceholderScreen('MapScreen');
 const ExploreScreen = PlaceholderScreen('ExploreScreen');
 const FeaturedScreen = PlaceholderScreen('FeaturedScreen');
@@ -131,8 +133,10 @@ export const AppNavigator = () => {
         // Luồng chủ sân
         <>
           <Stack.Screen name="OwnerApp" component={OwnerTabNavigator} />
+          <Stack.Screen name="ProfileEdit" component={EditProfileScreen} />
           <Stack.Screen name="BookingDetails" component={BookingDetailsScreen} />
           <Stack.Screen name="VenueDetails" component={VenueDetailsScreen} />
+          <Stack.Screen name="VenuePrice" component={VenuePriceScreen} />
           <Stack.Screen name="DayBooking" component={DayBookingScreen} />
           <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
         </>
@@ -140,8 +144,10 @@ export const AppNavigator = () => {
         // Luồng người dùng bình thường (User) hoặc Admin
         <>
           <Stack.Screen name="App" component={AppTabNavigator} />
+          <Stack.Screen name="ProfileEdit" component={EditProfileScreen} />
           <Stack.Screen name="BookingDetails" component={BookingDetailsScreen} />
           <Stack.Screen name="VenueDetails" component={VenueDetailsScreen} />
+          <Stack.Screen name="VenuePrice" component={VenuePriceScreen} />
           <Stack.Screen name="DayBooking" component={DayBookingScreen} />
           <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
         </>

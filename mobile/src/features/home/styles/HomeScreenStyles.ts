@@ -40,6 +40,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
+  aiAssistantButton: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   loginButton: {
     borderColor: '#ffffff',
     borderWidth: 1,

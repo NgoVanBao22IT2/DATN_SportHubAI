@@ -46,7 +46,7 @@ export const HomeScreen = () => {
     { id: 'badminton', label: 'Cầu lông', icon: 'ribbon-outline' },
     { id: 'football', label: 'Bóng đá', icon: 'football-outline' },
     { id: 'tennis', label: 'Quần vợt', icon: 'baseball-outline' },
-    { id: 'volleyball', label: 'Bóng chuyền', icon: 'basketball-outline' },
+    { id: 'volleyball', label: 'B.Chuyền', icon: 'basketball-outline' },
   ];
 
   // Mock Featured Venues Data
@@ -106,6 +106,14 @@ export const HomeScreen = () => {
         </View>
 
         <View style={styles.headerRight}>
+          <TouchableOpacity
+            style={styles.aiAssistantButton}
+            onPress={() => navigation.navigate('ChatAI')}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="chatbubble-ellipses-outline" size={18} color="#ffffff" />
+          </TouchableOpacity>
+
           {isAuthenticated ? (
             <TouchableOpacity
               style={styles.userProfileButton}

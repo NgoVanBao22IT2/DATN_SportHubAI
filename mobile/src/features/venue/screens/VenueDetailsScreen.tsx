@@ -148,10 +148,16 @@ export const VenueDetailsScreen = () => {
 
   const handleEventBooking = () => {
     setShowBookingModal(false);
-    Alert.alert(
-      'Đặt lịch sự kiện',
-      `Đặt sân cho giải đấu hoặc sự kiện tại ${venue.name}. Chức năng đang được phát triển.`,
-    );
+    navigation.navigate('BookingEven', {
+      venueId,
+      venueName: venue.name,
+      venueAddress: venue.address,
+      rating: venue.rating,
+      reviewCount: 128,
+      sportType: venue.category,
+      courtCount: 6,
+      imageUrl: venue.heroImage,
+    });
   };
 
   const handleCallPhone = () => {

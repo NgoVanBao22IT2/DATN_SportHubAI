@@ -31,8 +31,19 @@ export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthStackParamList>;
   App: NavigatorScreenParams<AppTabParamList>;
   OwnerApp: NavigatorScreenParams<OwnerTabParamList>;
+  ChatAI: undefined;
   VenueDetails: { venueId: string };
   DayBooking: {
+    venueId: string;
+    venueName: string;
+    venueAddress?: string;
+    rating?: number;
+    reviewCount?: number;
+    sportType?: string;
+    courtCount?: number;
+    imageUrl?: string;
+  };
+  BookingEven: {
     venueId: string;
     venueName: string;
     venueAddress?: string;

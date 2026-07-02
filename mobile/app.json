@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sporthubai.app"
+      "bundleIdentifier": "com.sporthubai.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Cho phép SportHub truy cập vị trí để hiển thị sân gần bạn trên bản đồ."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -30,6 +33,12 @@
         "expo-secure-store",
         {
           "faceIDPermission": "Cho phép ứng dụng sử dụng FaceID để đăng nhập nhanh."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Cho phép SportHub truy cập vị trí để hiển thị sân gần bạn trên bản đồ."
         }
       ]
     ]

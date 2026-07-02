@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
   Image,
-  Alert,
+  Modal,
+  Pressable,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -101,6 +102,25 @@ const REFUND_POLICIES = [
 const formatPrice = (price: number): string =>
   price.toLocaleString('vi-VN').replace(/,/g, '.') + ' đ';
 
+const formatDate = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
+const getMonthRange = (year: number, month: number) => {
+  const start = new Date(year, month, 1);
+  const end = new Date(year, month + 1, 0);
+  return { start, end };
+};
+
+const DATE_RANGE_OPTIONS = [
+  { id: 'jun2025', label: 'Tháng 6/2025', year: 2025, month: 5 },
+  { id: 'jul2025', label: 'Tháng 7/2025', year: 2025, month: 6 },
+  { id: 'aug2025', label: 'Tháng 8/2025', year: 2025, month: 7 },
+] as const;
+
 const PriceTable = ({ rows }: { rows: PriceRow[] }) => (
   <View style={styles.tableCard}>
     <View style={styles.tableHeaderRow}>
@@ -139,11 +159,13 @@ const PriceCategorySection = ({
   dayPeriod,
   onDayPeriodChange,
   altBackground = false,
+  showNote = false,
 }: {
   category: PriceCategory;
   dayPeriod: DayPeriod;
   onDayPeriodChange: (period: DayPeriod) => void;
   altBackground?: boolean;
+  showNote?: boolean;
 }) => {
   const rows = dayPeriod === 'weekday' ? category.weekdayPrices : category.weekendPrices;
 
@@ -177,12 +199,14 @@ const PriceCategorySection = ({
 
       <PriceTable rows={rows} />
 
-      <View style={styles.priceNoteRow}>
-        <Ionicons name="information-circle-outline" size={12} color="#6b7280" />
-        <Text style={styles.priceNoteText}>
-          Giá có thể thay đổi theo thời điểm hoặc chương trình khuyến mãi.
-        </Text>
-      </View>
+      {showNote && (
+        <View style={styles.priceNoteRow}>
+          <Ionicons name="time-outline" size={12} color="#6b7280" />
+          <Text style={styles.priceNoteText}>
+            Giá có thể thay đổi theo thời điểm hoặc chương trình khuyến mãi.
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -252,16 +276,22 @@ export const VenuePriceScreen = () => {
   const [activeTab, setActiveTab] = useState<ContentTab>('prices');
   const [generalDayPeriod, setGeneralDayPeriod] = useState<DayPeriod>('weekday');
   const [studentDayPeriod, setStudentDayPeriod] = useState<DayPeriod>('weekday');
-  const dateRangeLabel = '01/06/2025 - 30/06/2025';
+  const [selectedRangeId, setSelectedRangeId] = useState<string>('jun2025');
+  const [showDateModal, setShowDateModal] = useState(false);
+
+  const dateRangeLabel = useMemo(() => {
+    const option = DATE_RANGE_OPTIONS.find((item) => item.id === selectedRangeId) ?? DATE_RANGE_OPTIONS[0];
+    const { start, end } = getMonthRange(option.year, option.month);
+    return `${formatDate(start)} - ${formatDate(end)}`;
+  }, [selectedRangeId]);
 
   const handleBack = () => navigation.goBack();
 
-  const handleDateRangePress = () => {
-    Alert.alert(
-      'Chọn khoảng thời gian',
-      'Bộ chọn ngày chi tiết sẽ được kết nối ở bước tiếp theo.',
-      [{ text: 'OK' }],
-    );
+  const handleDateRangePress = () => setShowDateModal(true);
+
+  const handleSelectDateRange = (rangeId: string) => {
+    setSelectedRangeId(rangeId);
+    setShowDateModal(false);
   };
 
   return (
@@ -329,6 +359,7 @@ export const VenuePriceScreen = () => {
               category={PRICE_CATEGORIES[0]}
               dayPeriod={generalDayPeriod}
               onDayPeriodChange={setGeneralDayPeriod}
+              showNote
             />
             <PriceCategorySection
               category={PRICE_CATEGORIES[1]}
@@ -341,6 +372,38 @@ export const VenuePriceScreen = () => {
           <RegulationsTab />
         )}
       </ScrollView>
+
+      <Modal
+        visible={showDateModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowDateModal(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setShowDateModal(false)}>
+          <Pressable style={styles.modalContent} onPress={(e) => e.stopPropagation()}>
+            <Text style={styles.modalTitle}>Chọn khoảng thời gian</Text>
+            {DATE_RANGE_OPTIONS.map((option) => {
+              const { start, end } = getMonthRange(option.year, option.month);
+              const isSelected = selectedRangeId === option.id;
+              return (
+                <TouchableOpacity
+                  key={option.id}
+                  style={[styles.modalOption, isSelected && styles.modalOptionActive]}
+                  onPress={() => handleSelectDateRange(option.id)}
+                  activeOpacity={0.8}
+                >
+                  <Text style={[styles.modalOptionLabel, isSelected && styles.modalOptionLabelActive]}>
+                    {option.label}
+                  </Text>
+                  <Text style={styles.modalOptionSubLabel}>
+                    {formatDate(start)} - {formatDate(end)}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </Pressable>
+        </Pressable>
+      </Modal>
     </View>
   );
 };

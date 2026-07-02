@@ -45,6 +45,11 @@ export const styles = StyleSheet.create({
     height: 112,
     borderRadius: 8,
     backgroundColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   heroInfo: {
     flex: 1,
@@ -94,6 +99,7 @@ export const styles = StyleSheet.create({
   },
   dateRangePicker: {
     marginHorizontal: 16,
+    marginTop: 8,
     backgroundColor: '#ffffff',
     borderWidth: 1,
     borderColor: '#e5e7eb',
@@ -347,6 +353,49 @@ export const styles = StyleSheet.create({
     lineHeight: 16,
     fontStyle: 'italic',
     paddingHorizontal: 8,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
+  modalContent: {
+    width: '100%',
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
+    gap: 8,
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 8,
+  },
+  modalOption: {
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 8,
+    padding: 12,
+    gap: 2,
+  },
+  modalOptionActive: {
+    borderColor: '#1989a8',
+    backgroundColor: '#f0f9fb',
+  },
+  modalOptionLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#111827',
+  },
+  modalOptionLabelActive: {
+    color: '#1989a8',
+  },
+  modalOptionSubLabel: {
+    fontSize: 12,
+    color: '#6b7280',
   },
 });
 

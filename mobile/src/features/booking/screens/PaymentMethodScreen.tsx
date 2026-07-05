@@ -18,7 +18,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../core/navigation/navigation.types';
-import styles from '../styles/PaymentMethodStyles';
+import styles from '../styles/PaymentMethodScreenStyles';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

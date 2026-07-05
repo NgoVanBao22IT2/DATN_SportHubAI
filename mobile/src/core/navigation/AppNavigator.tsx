@@ -23,8 +23,11 @@ import { SearchScreen } from '../../features/venue/screens/SearchScreen';
 import { ExploreScreen } from '../../features/explore/screens/ExploreScreen';
 import AdvancedSearchScreen from '../../features/explore/screens/AdvancedSearchScreen';
 import PaymentScreen from '../../features/booking/screens/PaymentScreen';
-import PaymentMethod from '../../features/booking/screens/PaymentMethod';
+import PaymentMethod from '../../features/booking/screens/PaymentMethodScreen';
 import PaymentStatus from '../../features/booking/screens/PaymentStatusScreen';
+import BookingDetailsScreen from '../../features/booking/screens/BookingDetailsScreen';
+import CancelBookingScreen from '../../features/booking/screens/CancelBookingScreen';
+import ConfirmCancelBookingScreen from '../../features/booking/screens/ConfirmCancelBookingScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -47,7 +50,7 @@ const DashboardScreen = PlaceholderScreen('DashboardScreen');
 const VenuesScreen = PlaceholderScreen('VenuesScreen');
 
 
-const BookingDetailsScreen = PlaceholderScreen('BookingDetailsScreen');
+
 
 // ==========================================
 // NAVIGATOR INITIALIZATIONS
@@ -149,6 +152,7 @@ export const AppNavigator = () => {
           <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
           <Stack.Screen name="ChatAI" component={ChatAIScreen} />
           <Stack.Screen name="Search" component={SearchScreen} />
+          <Stack.Screen name="ConfirmCancelBooking" component={ConfirmCancelBookingScreen} options={{ headerShown: false }} />
         </>
       ) : (
         // Luồng người dùng bình thường (User) hoặc Admin
@@ -167,6 +171,8 @@ export const AppNavigator = () => {
           <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
           <Stack.Screen name="PaymentMethod" component={PaymentMethod} options={{ headerShown: false }} />
           <Stack.Screen name="PaymentStatus" component={PaymentStatus} options={{ headerShown: false }} />
+          <Stack.Screen name="CancelBooking" component={CancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ConfirmCancelBooking" component={ConfirmCancelBookingScreen} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

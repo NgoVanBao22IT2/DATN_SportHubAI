@@ -185,7 +185,7 @@ const PaymentStatusScreen: React.FC = () => {
           <View style={styles.successActionsContainer}>
             <TouchableOpacity
               style={[styles.footerButton, styles.btnWithIcon]}
-              onPress={() => Alert.alert('Đơn đặt', 'Đang chuyển tới chi tiết đơn đặt...')}
+              onPress={() => navigation.navigate('BookingDetails', { bookingId: paymentCode })}
               activeOpacity={0.85}
             >
               <Ionicons name="receipt-outline" size={18} color="#fff" />

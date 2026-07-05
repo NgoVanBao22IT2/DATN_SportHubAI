@@ -98,6 +98,28 @@ export type RootStackParamList = {
     paymentCode: string;
   };
   BookingDetails: { bookingId: string };
+  CancelBooking: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+  };
+  ConfirmCancelBooking: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+    cancelReason: string;
+    refundRate: number;
+  };
   VenuePrice: {
     venueId: string;
     venueName?: string;

@@ -20,6 +20,9 @@ import { ProfileScreen } from '../../features/profile/screens/ProfileScreen';
 import EditProfileScreen from '../../features/profile/screens/EditProfileScreen';
 import { MapScreen } from '../../features/map/screens/MapScreen';
 import { SearchScreen } from '../../features/venue/screens/SearchScreen';
+import { ExploreScreen } from '../../features/explore/screens/ExploreScreen';
+import AdvancedSearchScreen from '../../features/explore/screens/AdvancedSearchScreen';
+import PaymentScreen from '../../features/booking/screens/PaymentScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -36,7 +39,6 @@ const PlaceholderScreen = (name: string) => () => null;
 
 const BookingsScreen = PlaceholderScreen('BookingsScreen');
 const NotificationsScreen = PlaceholderScreen('NotificationsScreen');
-const ExploreScreen = PlaceholderScreen('ExploreScreen');
 const FeaturedScreen = PlaceholderScreen('FeaturedScreen');
 
 const DashboardScreen = PlaceholderScreen('DashboardScreen');
@@ -159,6 +161,8 @@ export const AppNavigator = () => {
           <Stack.Screen name="BookingConfirm" component={BookingConfirmScreen} />
           <Stack.Screen name="ChatAI" component={ChatAIScreen} />
           <Stack.Screen name="Search" component={SearchScreen} />
+          <Stack.Screen name="AdvancedSearch" component={AdvancedSearchScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

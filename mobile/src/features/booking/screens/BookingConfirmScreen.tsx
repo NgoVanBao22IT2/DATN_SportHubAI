@@ -83,20 +83,21 @@ export const BookingConfirmScreen = () => {
     }
 
     setIsSubmitting(true);
-    // Giả lập gọi API
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    // Giả lập gọi API lưu thông tin đặt sân
+    await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSubmitting(false);
 
-    Alert.alert(
-      '🎉 Đặt sân thành công!',
-      `Bạn đã đặt ${courtName} tại ${venueName}\nThời gian: ${timeRange}\nNgày: ${bookingDate}\nTổng tiền: ${formatPrice(totalPrice)}\n\nVui lòng thanh toán trong vòng 15 phút để giữ sân.`,
-      [
-        {
-          text: 'Về trang chủ',
-          onPress: () => navigation.navigate('App', { screen: 'HomeTab' } as any),
-        },
-      ],
-    );
+    // Chuyển sang màn hình thanh toán
+    navigation.navigate('Payment', {
+      venueId: route.params.venueId,
+      venueName,
+      venueAddress,
+      bookingDate,
+      courtName,
+      timeRange,
+      totalHours,
+      totalPrice,
+    });
   };
 
   const handleViewMap = () => {

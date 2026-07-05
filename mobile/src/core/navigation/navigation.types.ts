@@ -54,8 +54,19 @@ export type RootStackParamList = {
     imageUrl?: string;
   };
   Search: { initialQuery?: string };
+  AdvancedSearch: undefined;
   ProfileEdit: undefined;
   BookingConfirm: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+  };
+  Payment: {
     venueId: string;
     venueName: string;
     venueAddress: string;

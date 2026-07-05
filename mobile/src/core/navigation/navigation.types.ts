@@ -76,6 +76,27 @@ export type RootStackParamList = {
     totalHours: number;
     totalPrice: number;
   };
+  PaymentMethod: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+  };
+  PaymentStatus: {
+    venueId: string;
+    venueName: string;
+    venueAddress: string;
+    bookingDate: string;
+    courtName: string;
+    timeRange: string;
+    totalHours: number;
+    totalPrice: number;
+    paymentCode: string;
+  };
   BookingDetails: { bookingId: string };
   VenuePrice: {
     venueId: string;

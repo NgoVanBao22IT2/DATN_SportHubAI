@@ -23,6 +23,8 @@ import { SearchScreen } from '../../features/venue/screens/SearchScreen';
 import { ExploreScreen } from '../../features/explore/screens/ExploreScreen';
 import AdvancedSearchScreen from '../../features/explore/screens/AdvancedSearchScreen';
 import PaymentScreen from '../../features/booking/screens/PaymentScreen';
+import PaymentMethod from '../../features/booking/screens/PaymentMethod';
+import PaymentStatus from '../../features/booking/screens/PaymentStatusScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -163,6 +165,8 @@ export const AppNavigator = () => {
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="AdvancedSearch" component={AdvancedSearchScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="PaymentMethod" component={PaymentMethod} options={{ headerShown: false }} />
+          <Stack.Screen name="PaymentStatus" component={PaymentStatus} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

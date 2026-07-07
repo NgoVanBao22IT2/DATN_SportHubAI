@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
@@ -28,6 +28,11 @@ import PaymentStatus from '../../features/booking/screens/PaymentStatusScreen';
 import BookingDetailsScreen from '../../features/booking/screens/BookingDetailsScreen';
 import CancelBookingScreen from '../../features/booking/screens/CancelBookingScreen';
 import ConfirmCancelBookingScreen from '../../features/booking/screens/ConfirmCancelBookingScreen';
+import LoadingCancelBookingScreen from '../../features/booking/screens/LoadingCancelBookingScreen';
+import ResultCancelBookingScreen from '../../features/booking/screens/ResultCancelBookingScreen';
+import HistoryBookingScreen from '../../features/booking/screens/HistoryBookingScreen';
+import SupportCenterScreen from '../../features/profile/screens/SupportCenterScreen';
+import { SettingScreen } from '../../features/profile/screens/SettingScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -132,7 +137,16 @@ const OwnerTabNavigator = () => (
 // ==========================================
 export const AppNavigator = () => {
   // Lấy trạng thái đăng nhập và role từ Redux Store
-  const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user, isLoading } = useSelector((state: RootState) => state.auth);
+
+  // Hiển thị splash loading khi đang kiểm tra token lưu (bootstrapAuth)
+  if (isLoading) {
+    return (
+      <View style={splashStyles.container}>
+        <ActivityIndicator size="large" color="#1989a8" />
+      </View>
+    );
+  }
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -153,6 +167,11 @@ export const AppNavigator = () => {
           <Stack.Screen name="ChatAI" component={ChatAIScreen} />
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="ConfirmCancelBooking" component={ConfirmCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="LoadingCancelBooking" component={LoadingCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ResultCancelBooking" component={ResultCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="HistoryBooking" component={HistoryBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="SupportCenter" component={SupportCenterScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
         </>
       ) : (
         // Luồng người dùng bình thường (User) hoặc Admin
@@ -173,8 +192,22 @@ export const AppNavigator = () => {
           <Stack.Screen name="PaymentStatus" component={PaymentStatus} options={{ headerShown: false }} />
           <Stack.Screen name="CancelBooking" component={CancelBookingScreen} options={{ headerShown: false }} />
           <Stack.Screen name="ConfirmCancelBooking" component={ConfirmCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="LoadingCancelBooking" component={LoadingCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ResultCancelBooking" component={ResultCancelBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="HistoryBooking" component={HistoryBookingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="SupportCenter" component={SupportCenterScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>
   );
 };
+
+const splashStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

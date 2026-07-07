@@ -56,6 +56,7 @@ export type RootStackParamList = {
   Search: { initialQuery?: string };
   AdvancedSearch: undefined;
   ProfileEdit: undefined;
+  Setting: undefined;
   BookingConfirm: {
     venueId: string;
     venueName: string;
@@ -120,6 +121,29 @@ export type RootStackParamList = {
     cancelReason: string;
     refundRate: number;
   };
+  LoadingCancelBooking: {
+    bookingDate: string;
+    cancelledAt?: string;
+    venueName?: string;
+    courtName?: string;
+    timeRange?: string;
+    totalPrice?: number;
+    refundAmount?: number;
+  };
+  ResultCancelBooking: {
+    venueName?: string;
+    courtName?: string;
+    orderCode?: string;
+    bookingDate?: string;
+    timeRange?: string;
+    refundAmount?: number;
+    paymentMethod?: string;
+    cancelledAt?: string;
+    confirmedAt?: string;
+    receivedAt?: string;
+  };
+  HistoryBooking: undefined;
+  SupportCenter: undefined;
   VenuePrice: {
     venueId: string;
     venueName?: string;

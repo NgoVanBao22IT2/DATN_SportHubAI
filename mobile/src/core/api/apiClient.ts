@@ -7,6 +7,8 @@ const BASE_URL = 'http://192.168.1.99:5000/api/v1'; // Sẽ cấu hình qua bi�
 export const SECURE_STORE_KEYS = {
   ACCESS_TOKEN: 'access_token',
   REFRESH_TOKEN: 'refresh_token',
+  USER_INFO: 'user_info',
+  IS_LOGGED_IN: 'is_logged_in',
 };
 
 export const apiClient: AxiosInstance = axios.create({
@@ -119,6 +121,8 @@ apiClient.interceptors.response.use(
         // Refresh token không hợp lệ hoặc hết hạn -> Đăng xuất người dùng
         await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.ACCESS_TOKEN);
         await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.REFRESH_TOKEN);
+        await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.USER_INFO);
+        await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.IS_LOGGED_IN);
         
         // Ở đây có thể trigger một event hoặc dispatch action redux để điều hướng về màn hình Login
         // Ví dụ: RootNavigation.navigate('Login');

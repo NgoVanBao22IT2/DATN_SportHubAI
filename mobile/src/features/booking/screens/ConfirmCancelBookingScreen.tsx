@@ -68,17 +68,24 @@ const ConfirmCancelBookingScreen: React.FC = () => {
 
       await new Promise((res) => setTimeout(res, 1200)); // giả lập delay
 
-      Alert.alert(
-        'Hủy đặt sân thành công',
-        `Đơn đặt sân tại ${venueName} đã được hủy. Số tiền ${formatPrice(refundAmount)} sẽ được hoàn trong 5 - 7 ngày làm việc.`,
-        [
-          {
-            text: 'Đồng ý',
-            onPress: () =>
-              navigation.navigate('App', { screen: 'HomeTab' } as any),
-          },
-        ],
-      );
+      // Điều hướng sang màn hình xử lý hoàn tiền
+      navigation.replace('LoadingCancelBooking', {
+        bookingDate,
+        venueName,
+        courtName,
+        timeRange,
+        totalPrice,
+        refundAmount,
+        cancelledAt: (() => {
+          const now = new Date();
+          const hh = String(now.getHours()).padStart(2, '0');
+          const mm = String(now.getMinutes()).padStart(2, '0');
+          const dd = String(now.getDate()).padStart(2, '0');
+          const mo = String(now.getMonth() + 1).padStart(2, '0');
+          const yyyy = now.getFullYear();
+          return `${hh}:${mm} - ${dd}/${mo}/${yyyy}`;
+        })(),
+      });
     } catch {
       Alert.alert('Có lỗi xảy ra', 'Không thể hủy đặt sân. Vui lòng thử lại sau.');
     } finally {

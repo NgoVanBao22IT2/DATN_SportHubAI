@@ -9,7 +9,7 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../core/navigation/navigation.types';
@@ -40,8 +40,8 @@ const SCHEDULE_DATA: DateSchedule[] = [
     id: '1',
     dateLabel: '10/07/2026',
     courts: [
-      { courtName: 'Sân 1', slots: ['21:30 - 22:30'] },
-      { courtName: 'Sân 2', slots: ['20:30 - 23:50'] },
+      { courtName: 'Sân 1', slots: ['21:30 - 23:30'] },
+      { courtName: 'Sân 2', slots: ['20:30 - 23:30'] },
     ],
   },
   {
@@ -50,11 +50,11 @@ const SCHEDULE_DATA: DateSchedule[] = [
     courts: [
       {
         courtName: 'Sân 1',
-        slots: ['20:00 - 21:30', '21:30 - 23:00', '09:30 - 11:00', '13:00 - 15:00'],
+        slots: ['05:30 - 07:30', '07:30 - 09:30', '09:30 - 11:30', '13:00 - 15:00'],
       },
       {
         courtName: 'Sân 2',
-        slots: ['07:30 - 09:30', '07:00 - 09:00', '09:30 - 10:30', '12:00 - 13:00'],
+        slots: ['07:30 - 9:30', '07:30 - 08:30', '09:30 - 10:00', '12:00 - 14:00'],
       },
     ],
   },
@@ -80,8 +80,8 @@ const COURSES: CourseItem[] = [
     name: 'Lớp học Pickleball Cơ Bản',
     location: 'ECO PICK',
     distance: '4.1km',
-    timeRange: '07:00 - 22:00',
-    price: '339,000 đ/Buổi',
+    timeRange: '07:00 - 23:00',
+    price: '330.000 đ/Buổi',
     badgeType: 'hot',
     badgeLabel: 'HOT',
     imageUrl:
@@ -96,7 +96,7 @@ const COURSES: CourseItem[] = [
     location: 'Trung tâm Thể thao Q1',
     distance: '1.2km',
     timeRange: 'T2 - CN',
-    price: '200,000 đ/Buổi',
+    price: '250.000 đ/Buổi',
     badgeType: 'gold',
     badgeLabel: 'ƯU ĐÃI',
     imageUrl:
@@ -150,8 +150,8 @@ export const FeaturedScreen = () => {
       {/* ===== HEADER ===== */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          {/* Logo icon (dấu hiệu của SportHub) */}
-          <Ionicons name="fitness-outline" size={26} color="#ffffff" />
+          {/* Logo icon (badminton shuttlecock từ MaterialCommunityIcons) */}
+          <MaterialCommunityIcons name="badminton" size={28} color="#ffffff" />
           <Text style={styles.headerTitle}>SportHub</Text>
         </View>
         <TouchableOpacity
@@ -233,18 +233,26 @@ export const FeaturedScreen = () => {
                   2A, Hòa Nam 6, Phường Hòa Khánh, TP Đà Nẵng
                 </Text>
               </View>
-              <Text style={styles.venueUpdated}>Cập nhật lúc 08:25 • 10/07/2026</Text>
+              
+              {/* Capsule cập nhật thời gian mượt mà */}
+              <View style={styles.venueUpdatedContainer}>
+                <Ionicons name="time-outline" size={13} color="#4b5563" />
+                <Text style={styles.venueUpdatedText}>Cập nhật lúc 08:29 • 10/07/2026</Text>
+              </View>
             </View>
           </View>
 
+          {/* Hot alert block double line text */}
           <TouchableOpacity
             style={styles.hotAlertRow}
             onPress={() => navigation.navigate('VenueDetails', { venueId: '2' })}
             activeOpacity={0.8}
           >
             <Text style={{ fontSize: 16 }}>🔥</Text>
-            <Text style={styles.hotAlertText}>Sân trống trong hôm nay</Text>
-            <Text style={styles.hotAlertLink}>#tim-kiem-san-trong</Text>
+            <View style={styles.hotAlertTextContainer}>
+              <Text style={styles.hotAlertText}>Sân trống trong hôm nay</Text>
+              <Text style={styles.hotAlertLink}>#thongbaosantrong</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -281,14 +289,13 @@ export const FeaturedScreen = () => {
               </View>
             ))}
 
-            {/* See Detail Button */}
+            {/* See Detail Button solid teal with white text */}
             <TouchableOpacity
               style={styles.seeDetailBtn}
               onPress={() => navigation.navigate('VenueDetails', { venueId: '2' })}
               activeOpacity={0.8}
             >
-              <Text style={styles.seeDetailText}>Xem chi tiết</Text>
-              <Ionicons name="arrow-forward" size={14} color="#1989a8" />
+              <Text style={styles.seeDetailText}>Xem chi tiết  →</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -296,7 +303,7 @@ export const FeaturedScreen = () => {
         {/* ===== KHÓA HỌC MỚI SECTION ===== */}
         <View style={styles.sectionHeader}>
           <View style={styles.sectionHeaderLeft}>
-            <Text style={{ fontSize: 18 }}>🎓</Text>
+            <Text style={{ fontSize: 18 }}>🔥</Text>
             <Text style={styles.sectionTitle}>Khóa học mới</Text>
           </View>
           <TouchableOpacity
@@ -307,6 +314,7 @@ export const FeaturedScreen = () => {
         </View>
 
         {COURSES.map((course) => (
+          
           <TouchableOpacity
             key={course.id}
             style={styles.courseCard}
@@ -322,15 +330,25 @@ export const FeaturedScreen = () => {
                 style={styles.courseImage}
                 resizeMode="cover"
               />
-              {course.badgeType && (
-                <View
-                  style={[
-                    styles.courseBadge,
-                    course.badgeType === 'hot' ? styles.courseBadgeHot : styles.courseBadgeGold,
-                  ]}
-                >
-                  <Text style={styles.courseBadgeText}>{course.badgeLabel}</Text>
+              
+              {/* Double badge style matching mockup */}
+              {course.badgeType === 'hot' ? (
+                <View style={styles.courseBadgeRow}>
+                  <View style={[styles.courseBadge, styles.courseBadgeHot]}>
+                    <Text style={styles.courseBadgeText}>HOT</Text>
+                  </View>
+                  <View style={[styles.courseBadge, styles.courseBadgeBlue]}>
+                    <Text style={styles.courseBadgeTextBlue}>Khóa học</Text>
+                  </View>
                 </View>
+              ) : (
+                course.badgeType && (
+                  <View style={styles.courseBadgeRow}>
+                    <View style={[styles.courseBadge, styles.courseBadgeGold]}>
+                      <Text style={styles.courseBadgeText}>{course.badgeLabel}</Text>
+                    </View>
+                  </View>
+                )
               )}
             </View>
 
@@ -345,19 +363,23 @@ export const FeaturedScreen = () => {
                 </Text>
               </View>
 
-              <View style={styles.courseDetailsRow}>
-                <View style={styles.courseTimeRow}>
-                  <Ionicons name="time-outline" size={13} color="#6b7280" />
-                  <Text style={styles.courseTimeText}>{course.timeRange}</Text>
+              {/* Capsules Row for Course Info matching mockup */}
+              <View style={styles.courseCapsulesRow}>
+                <View style={styles.courseCapsule}>
+                  <Ionicons name={course.id === '1' ? "time-outline" : "calendar-outline"} size={13} color="#4b5563" />
+                  <Text style={styles.courseCapsuleText}>{course.timeRange}</Text>
                 </View>
-                <Text style={styles.coursePriceText}>{course.price}</Text>
+                <View style={styles.courseCapsule}>
+                  <Ionicons name="pricetag-outline" size={13} color="#4b5563" />
+                  <Text style={styles.courseCapsuleText}>{course.price}</Text>
+                </View>
               </View>
 
               <View style={styles.courseFooter}>
                 <View style={styles.coachRow}>
                   <Image source={{ uri: course.coachAvatar }} style={styles.coachAvatar} />
                   <View>
-                    <Text style={styles.coachLabelText}>Huấn luyện viên</Text>
+                    <Text style={styles.coachLabelText}>HUẤN LUYỆN VIÊN</Text>
                     <Text style={styles.coachName}>{course.coachName}</Text>
                   </View>
                 </View>

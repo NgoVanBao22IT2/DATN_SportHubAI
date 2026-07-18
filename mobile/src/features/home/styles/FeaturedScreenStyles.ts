@@ -45,14 +45,14 @@ export const styles = StyleSheet.create({
   },
 
   // ==========================================
-  // CATEGORY CHIPS (Pill Buttons – horizontal scroll)
+  // CATEGORY CHIPS
   // ==========================================
   chipsScrollContent: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
     paddingHorizontal: 16,
-    paddingVertical: 25,
+    paddingVertical: 16,
   },
   chipActive: {
     backgroundColor: TEAL,
@@ -61,7 +61,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     height: 40,
-    // paddingVertical: 0,
     borderRadius: 9999,
     shadowColor: TEAL,
     shadowOffset: { width: 0, height: 4 },
@@ -76,7 +75,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     height: 40,
-    // paddingVertical: 10,
     borderRadius: 9999,
     borderWidth: 1,
     borderColor: '#bec8ce',
@@ -199,29 +197,43 @@ export const styles = StyleSheet.create({
     flex: 1,
     lineHeight: 16,
   },
-  venueUpdated: {
+  venueUpdatedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f3f4f6',
+    borderRadius: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    marginTop: 8,
+    gap: 6,
+  },
+  venueUpdatedText: {
     fontSize: 11,
-    color: '#9ca3af',
+    color: '#4b5563',
+    fontWeight: '500',
   },
   hotAlertRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff7ed',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    marginTop: 10,
-    gap: 6,
+    backgroundColor: '#e0f2fe', // Light Blue matching mockup
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginTop: 12,
+    gap: 8,
+  },
+  hotAlertTextContainer: {
+    flex: 1,
+    gap: 2,
   },
   hotAlertText: {
-    fontSize: 12,
-    color: '#ea580c',
-    fontWeight: '600',
-    flex: 1,
+    fontSize: 13,
+    color: '#0369a1', // Dark blue
+    fontWeight: '700',
   },
   hotAlertLink: {
     fontSize: 11,
-    color: TEAL,
+    color: '#0284c7', // Medium blue
     fontWeight: '600',
   },
 
@@ -286,10 +298,10 @@ export const styles = StyleSheet.create({
   timeSlotsRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 6,
+    gap: 8,
   },
   timeSlotBtn: {
-    backgroundColor: TEAL,
+    backgroundColor: '#dcfce7', // Light green background matching mockup
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -297,22 +309,22 @@ export const styles = StyleSheet.create({
   timeSlotText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#ffffff',
+    color: '#15803d', // Dark green text matching mockup
   },
   seeDetailBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f9ff',
-    borderRadius: 10,
-    paddingVertical: 10,
-    marginTop: 4,
-    gap: 4,
+    backgroundColor: TEAL, // Solid Teal background matching mockup
+    borderRadius: 12,
+    height: 44,
+    marginTop: 12,
+    gap: 6,
   },
   seeDetailText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '700',
-    color: TEAL,
+    color: '#ffffff', // White text matching mockup
   },
 
   // ==========================================
@@ -357,15 +369,21 @@ export const styles = StyleSheet.create({
   courseImageContainer: {
     height: 150,
     position: 'relative',
+    backgroundColor: 'rgba(24, 88, 217, 0.2)',
   },
+  
   courseImage: {
     width: '100%',
     height: '100%',
   },
-  courseBadge: {
+  courseBadgeRow: {
+    flexDirection: 'row',
     position: 'absolute',
     top: 10,
     left: 10,
+    gap: 6,
+  },
+  courseBadge: {
     borderRadius: 6,
     paddingHorizontal: 8,
     paddingVertical: 4,
@@ -376,10 +394,19 @@ export const styles = StyleSheet.create({
   courseBadgeGold: {
     backgroundColor: '#f59e0b',
   },
+  courseBadgeBlue: {
+    backgroundColor: '#e0f2fe',
+  },
   courseBadgeText: {
     fontSize: 10,
     fontWeight: '800',
     color: '#ffffff',
+    letterSpacing: 0.5,
+  },
+  courseBadgeTextBlue: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: '#0369a1',
     letterSpacing: 0.5,
   },
   courseBody: {
@@ -395,32 +422,31 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   courseMetaText: {
     fontSize: 12,
     color: '#6b7280',
   },
-  courseDetailsRow: {
+  courseCapsulesRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 12,
+    gap: 8,
+    marginBottom: 14,
   },
-  courseTimeRow: {
+  courseCapsule: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#f3f4f6', // Light grey capsule background
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
     gap: 4,
   },
-  courseTimeText: {
+  courseCapsuleText: {
     fontSize: 12,
-    color: '#374151',
+    color: '#4b5563',
     fontWeight: '600',
-  },
-  coursePriceText: {
-    fontSize: 13,
-    fontWeight: '800',
-    color: TEAL,
   },
   courseFooter: {
     flexDirection: 'row',

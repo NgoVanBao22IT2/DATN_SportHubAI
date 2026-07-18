@@ -463,7 +463,7 @@ export const VenueDetailsScreen = () => {
             </View>
           )}
 
-          {activeTab === 2 && (
+          {activeTab === 4 && (
             <View style={{ paddingBottom: 16 }}>
               {/* Rating Overview Card */}
               <View style={[reviewsStyles.ratingOverviewCard, { marginHorizontal: 0, marginTop: 8 }]}>
@@ -583,7 +583,7 @@ export const VenueDetailsScreen = () => {
             </View>
           )}
 
-          {activeTab === 3 && (
+          {activeTab === 2 && (
             <View style={{ paddingVertical: 24, alignItems: 'center' }}>
               <Ionicons name="images-outline" size={40} color="#cbd5e1" />
               <Text
@@ -599,7 +599,7 @@ export const VenueDetailsScreen = () => {
             </View>
           )}
 
-          {activeTab === 4 && (
+          {activeTab === 3 && (
             <View style={{ paddingVertical: 24, alignItems: 'center' }}>
               <Ionicons
                 name="document-text-outline"

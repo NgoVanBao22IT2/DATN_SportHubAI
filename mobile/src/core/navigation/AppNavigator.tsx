@@ -36,6 +36,7 @@ import { SettingScreen } from '../../features/profile/screens/SettingScreen';
 import { NotificationScreen } from '../../features/profile/screens/NotificationScreen';
 import { LanguageScreen } from '../../features/profile/screens/LanguageScreen';
 import { VenueReviewsScreen } from '../../features/venue/screens/VenueReviewsScreen';
+import { FeaturedScreen } from '../../features/home/screens/FeaturedScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -52,7 +53,6 @@ const PlaceholderScreen = (name: string) => () => null;
 
 const BookingsScreen = PlaceholderScreen('BookingsScreen');
 const NotificationsScreen = PlaceholderScreen('NotificationsScreen');
-const FeaturedScreen = PlaceholderScreen('FeaturedScreen');
 
 const DashboardScreen = PlaceholderScreen('DashboardScreen');
 const VenuesScreen = PlaceholderScreen('VenuesScreen');
@@ -119,8 +119,8 @@ const AppTabNavigator = () => (
   >
     <Tab.Screen name="HomeTab" component={HomeScreen} options={{ tabBarLabel: 'Trang chủ' }} />
     <Tab.Screen name="MapTab" component={MapScreen} options={{ tabBarLabel: 'Bản đồ' }} />
-    <Tab.Screen name="ExploreTab" component={ExploreScreen} options={{ tabBarLabel: 'Khám phá' }} />
-    <Tab.Screen name="FeaturedTab" component={FeaturedScreen} options={{ tabBarLabel: 'Nổi bật' }} />
+    <Tab.Screen name="ExploreTab" component={FeaturedScreen} options={{ tabBarLabel: 'Khám phá' }} />
+    <Tab.Screen name="FeaturedTab" component={ExploreScreen} options={{ tabBarLabel: 'Nổi bật' }} />
     <Tab.Screen name="ProfileTab" component={ProfileScreen} options={{ tabBarLabel: 'Tài khoản' }} />
   </Tab.Navigator>
 );

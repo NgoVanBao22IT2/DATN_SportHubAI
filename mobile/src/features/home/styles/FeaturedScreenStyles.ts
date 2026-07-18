@@ -369,7 +369,8 @@ export const styles = StyleSheet.create({
   courseImageContainer: {
     height: 150,
     position: 'relative',
-    backgroundColor: 'rgba(24, 88, 217, 0.2)',
+    borderBottomColor: 'rgba(24, 88, 217, 0.2)',
+    borderBottomWidth: 1,
   },
   
   courseImage: {

@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../core/navigation/navigation.types';
 import styles from '../styles/FeaturedScreenStyles';
+import { LinearGradient } from 'expo-linear-gradient';
 
 type FeaturedNavProp = StackNavigationProp<RootStackParamList>;
 
@@ -232,16 +233,17 @@ export const FeaturedScreen = () => {
                 <Text style={styles.venueAddress} numberOfLines={2}>
                   2A, Hòa Nam 6, Phường Hòa Khánh, TP Đà Nẵng
                 </Text>
-              </View>
-              
-              {/* Capsule cập nhật thời gian mượt mà */}
+              </View>          
+            </View>
+            
+          </View>
+          <TouchableOpacity>
+            {/* Capsule cập nhật thời gian mượt mà */}
               <View style={styles.venueUpdatedContainer}>
                 <Ionicons name="time-outline" size={13} color="#4b5563" />
                 <Text style={styles.venueUpdatedText}>Cập nhật lúc 08:29 • 10/07/2026</Text>
               </View>
-            </View>
-          </View>
-
+          </TouchableOpacity>
           {/* Hot alert block double line text */}
           <TouchableOpacity
             style={styles.hotAlertRow}
@@ -301,6 +303,7 @@ export const FeaturedScreen = () => {
         ))}
 
         {/* ===== KHÓA HỌC MỚI SECTION ===== */}
+
         <View style={styles.sectionHeader}>
           <View style={styles.sectionHeaderLeft}>
             <Text style={{ fontSize: 18 }}>🔥</Text>
@@ -392,6 +395,12 @@ export const FeaturedScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
+            <LinearGradient
+              colors={course.id === '1' ? ['#1989a8', '#4ade80'] : ['#1989a8', '#38bdf8']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={{ height: 4, width: '100%' }}
+            />
           </TouchableOpacity>
         ))}
       </ScrollView>

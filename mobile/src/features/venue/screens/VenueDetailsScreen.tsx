@@ -19,6 +19,7 @@ import { RootState, AppDispatch } from '../../../core/store/store';
 import { fetchVenueDetailWithCourts, clearSelectedVenue } from '../slices/venueSlice';
 import { BookingTypeModal } from '../components/BookingTypeModal';
 import styles from '../styles/VenueDetailsScreenStyles';
+import reviewsStyles from '../styles/VenueReviewsScreenStyles';
 
 type VenueDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'VenueDetails'>;
 type VenueDetailsRouteProp = RouteProp<RootStackParamList, 'VenueDetails'>;
@@ -48,7 +49,7 @@ const MOCK_VENUE = {
 // =============================================================================
 // Tab items
 // =============================================================================
-const TABS = ['Thông tin', 'Dịch vụ', 'Hình ảnh', 'Điều khoản & quy định'];
+const TABS = ['Thông tin', 'Dịch vụ', 'Hình ảnh', 'Điều khoản & quy định', 'Đánh giá'];
 
 // =============================================================================
 // COMPONENT
@@ -69,6 +70,81 @@ export const VenueDetailsScreen = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [reviews, setReviews] = useState([
+    {
+      id: '1',
+      name: 'Nguyễn Minh Tuấn',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop',
+      stars: 5,
+      date: '12/07/2026',
+      comment: 'Sân đẹp, sạch sẽ, ánh sáng tốt. Nhân viên thân thiện, phục vụ nhiệt tình. Sẽ tiếp tục ủng hộ!',
+      photos: [
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200',
+        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200',
+        'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200',
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200',
+      ],
+    },
+    {
+      id: '2',
+      name: 'Trần Hoàng Anh',
+      avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=200&auto=format&fit=crop',
+      stars: 5,
+      date: '08/07/2026',
+      comment: 'Không gian thoáng mát, có đầy đủ tiện ích. Giá cả hợp lý. Rất hài lòng!',
+      photos: [
+        'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200',
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200',
+        'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200',
+      ],
+    },
+  ]);
+
+  const handleWriteReview = () => {
+    Alert.prompt(
+      'Viết đánh giá mới',
+      'Nhập nhận xét của bạn về sân:',
+      [
+        { text: 'Hủy', style: 'cancel' },
+        {
+          text: 'Gửi',
+          onPress: (text?: string) => {
+            if (!text || !text.trim()) return;
+            const newReview = {
+              id: Date.now().toString(),
+              name: 'Người dùng SportHub',
+              avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200',
+              stars: 5,
+              date: 'Hôm nay',
+              comment: text.trim(),
+              photos: [
+                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200',
+              ],
+            };
+            setReviews([newReview, ...reviews]);
+            Alert.alert('Thành công', 'Cảm ơn bạn đã đóng góp đánh giá!');
+          },
+        },
+      ],
+      'plain-text'
+    );
+  };
+
+  const renderStars = (count: number, size: number = 14) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <Ionicons
+          key={i}
+          name={i <= count ? 'star' : 'star-outline'}
+          size={size}
+          color="#feae2c"
+        />
+      );
+    }
+    return stars;
+  };
 
   // =============================================================================
   // Gọi API lấy chi tiết venue khi mount
@@ -244,10 +320,21 @@ export const VenueDetailsScreen = () => {
           </View>
 
           {/* Rating Badge */}
-          <View style={styles.ratingBadge}>
+          <TouchableOpacity
+            style={styles.ratingBadge}
+            onPress={() =>
+              navigation.navigate('VenueReviews', {
+                venueId,
+                venueName: venue.name,
+                venueAddress: venue.address,
+                imageUrl: venue.heroImage,
+              })
+            }
+            activeOpacity={0.7}
+          >
             <Ionicons name="star" size={16} color="#feae2c" />
             <Text style={styles.ratingBadgeText}>{venue.rating}</Text>
-          </View>
+          </TouchableOpacity>
 
           {/* Venue Title Row */}
           <View style={styles.titleRow}>
@@ -377,6 +464,126 @@ export const VenueDetailsScreen = () => {
           )}
 
           {activeTab === 2 && (
+            <View style={{ paddingBottom: 16 }}>
+              {/* Rating Overview Card */}
+              <View style={[reviewsStyles.ratingOverviewCard, { marginHorizontal: 0, marginTop: 8 }]}>
+                <View style={reviewsStyles.ratingLeft}>
+                  <Text style={reviewsStyles.ratingScore}>4.8</Text>
+                  <View style={reviewsStyles.starsRow}>{renderStars(5, 14)}</View>
+                  <Text style={reviewsStyles.ratingCountText}>(256 đánh giá)</Text>
+                </View>
+
+                <View style={reviewsStyles.ratingRight}>
+                  {[
+                    { label: '5', percentage: '82%', count: '210' },
+                    { label: '4', percentage: '15%', count: '38' },
+                    { label: '3', percentage: '2%', count: '5' },
+                    { label: '2', percentage: '1%', count: '2' },
+                    { label: '1', percentage: '0.4%', count: '1' },
+                  ].map((bar) => (
+                    <View key={bar.label} style={reviewsStyles.progressBarRow}>
+                      <Text style={reviewsStyles.barLabel}>{bar.label}</Text>
+                      <Ionicons name="star" size={11} color="#feae2c" />
+                      <View style={reviewsStyles.barTrack}>
+                        <View style={[reviewsStyles.barFill, { width: bar.percentage as any }]} />
+                      </View>
+                      <Text style={reviewsStyles.barCount}>{bar.count}</Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
+
+              {/* Danh mục đánh giá */}
+              <View style={[reviewsStyles.sectionTitleRow, { paddingHorizontal: 0 }]}>
+                <Text style={reviewsStyles.sectionTitle}>Danh mục đánh giá</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('VenueReviews', {
+                      venueId,
+                      venueName: venue.name,
+                      venueAddress: venue.address,
+                      imageUrl: venue.heroImage,
+                    })
+                  }
+                >
+                  <Text style={reviewsStyles.seeAllText}>Xem tất cả  <Ionicons name="chevron-forward" size={12} color="#1989a8" /></Text>
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={[reviewsStyles.categoriesContainer, { paddingLeft: 0, marginBottom: 16 }]}
+              >
+                {[
+                  { label: 'Mặt sân', score: 4.8, icon: 'tennisball-outline' as const },
+                  { label: 'Ánh sáng', score: 4.9, icon: 'sunny-outline' as const },
+                  { label: 'Thông gió', score: 4.7, icon: 'leaf-outline' as const },
+                  { label: 'Vệ sinh', score: 4.8, icon: 'cut-outline' as const },
+                  { label: 'Bãi giữ xe', score: 4.6, icon: 'car-outline' as const },
+                ].map((cat, idx) => (
+                  <View key={idx} style={reviewsStyles.categoryBox}>
+                    <Ionicons name={cat.icon} size={20} color="#1989a8" />
+                    <Text style={reviewsStyles.categoryLabel}>{cat.label}</Text>
+                    <Text style={reviewsStyles.categoryScore}>{cat.score}</Text>
+                  </View>
+                ))}
+              </ScrollView>
+
+              {/* Đánh giá nổi bật */}
+              <View style={[reviewsStyles.sectionTitleRow, { paddingHorizontal: 0, marginBottom: 8 }]}>
+                <Text style={reviewsStyles.sectionTitle}>Đánh giá nổi bật</Text>
+              </View>
+
+              <View style={[reviewsStyles.reviewsList, { paddingHorizontal: 0 }]}>
+                {reviews.map((rev) => (
+                  <View key={rev.id} style={reviewsStyles.reviewCard}>
+                    <View style={reviewsStyles.reviewHeader}>
+                      <View style={reviewsStyles.reviewerInfo}>
+                        <Image source={{ uri: rev.avatar }} style={reviewsStyles.reviewerAvatar} />
+                        <View style={{ gap: 2 }}>
+                          <Text style={reviewsStyles.reviewerName}>{rev.name}</Text>
+                          <View style={{ flexDirection: 'row', gap: 2 }}>
+                            {renderStars(rev.stars, 12)}
+                          </View>
+                        </View>
+                      </View>
+                      <View style={reviewsStyles.reviewMeta}>
+                        <Text style={reviewsStyles.reviewDate}>{rev.date}</Text>
+                      </View>
+                    </View>
+
+                    <Text style={reviewsStyles.reviewComment}>{rev.comment}</Text>
+
+                    {rev.photos.length > 0 && (
+                      <View style={reviewsStyles.photoRow}>
+                        {rev.photos.map((photo, pIdx) => (
+                          <Image
+                            key={pIdx}
+                            source={{ uri: photo }}
+                            style={reviewsStyles.reviewPhoto}
+                            resizeMode="cover"
+                          />
+                        ))}
+                      </View>
+                    )}
+                  </View>
+                ))}
+              </View>
+
+              {/* Viết đánh giá Button */}
+              <TouchableOpacity
+                style={[reviewsStyles.writeReviewBtn, { marginHorizontal: 0, marginTop: 20 }]}
+                onPress={handleWriteReview}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="create-outline" size={20} color="#1989a8" />
+                <Text style={reviewsStyles.writeReviewText}>Viết đánh giá</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {activeTab === 3 && (
             <View style={{ paddingVertical: 24, alignItems: 'center' }}>
               <Ionicons name="images-outline" size={40} color="#cbd5e1" />
               <Text
@@ -392,7 +599,7 @@ export const VenueDetailsScreen = () => {
             </View>
           )}
 
-          {activeTab === 3 && (
+          {activeTab === 4 && (
             <View style={{ paddingVertical: 24, alignItems: 'center' }}>
               <Ionicons
                 name="document-text-outline"

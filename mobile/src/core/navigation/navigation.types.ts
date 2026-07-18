@@ -33,6 +33,12 @@ export type RootStackParamList = {
   OwnerApp: NavigatorScreenParams<OwnerTabParamList>;
   ChatAI: undefined;
   VenueDetails: { venueId: string };
+  VenueReviews: {
+    venueId: string;
+    venueName?: string;
+    venueAddress?: string;
+    imageUrl?: string;
+  };
   DayBooking: {
     venueId: string;
     venueName: string;
@@ -57,6 +63,8 @@ export type RootStackParamList = {
   AdvancedSearch: undefined;
   ProfileEdit: undefined;
   Setting: undefined;
+  Notification: undefined;
+  Language: undefined;
   BookingConfirm: {
     venueId: string;
     venueName: string;

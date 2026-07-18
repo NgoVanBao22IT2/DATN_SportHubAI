@@ -33,6 +33,9 @@ import ResultCancelBookingScreen from '../../features/booking/screens/ResultCanc
 import HistoryBookingScreen from '../../features/booking/screens/HistoryBookingScreen';
 import SupportCenterScreen from '../../features/profile/screens/SupportCenterScreen';
 import { SettingScreen } from '../../features/profile/screens/SettingScreen';
+import { NotificationScreen } from '../../features/profile/screens/NotificationScreen';
+import { LanguageScreen } from '../../features/profile/screens/LanguageScreen';
+import { VenueReviewsScreen } from '../../features/venue/screens/VenueReviewsScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -172,6 +175,9 @@ export const AppNavigator = () => {
           <Stack.Screen name="HistoryBooking" component={HistoryBookingScreen} options={{ headerShown: false }} />
           <Stack.Screen name="SupportCenter" component={SupportCenterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Language" component={LanguageScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="VenueReviews" component={VenueReviewsScreen} options={{ headerShown: false }} />
         </>
       ) : (
         // Luồng người dùng bình thường (User) hoặc Admin
@@ -197,6 +203,9 @@ export const AppNavigator = () => {
           <Stack.Screen name="HistoryBooking" component={HistoryBookingScreen} options={{ headerShown: false }} />
           <Stack.Screen name="SupportCenter" component={SupportCenterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Language" component={LanguageScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="VenueReviews" component={VenueReviewsScreen} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

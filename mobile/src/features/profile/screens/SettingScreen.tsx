@@ -122,7 +122,7 @@ export const SettingScreen = () => {
             {/* Thông báo */}
             <TouchableOpacity 
               style={[styles.settingsItem, styles.settingsItemDivider]} 
-              onPress={() => handleActionAlert('Thông báo', 'Cài đặt cấu hình nhận thông báo & nhắc nhở đặt sân.')}
+              onPress={() => navigation.navigate('Notification')}
               activeOpacity={0.7}
             >
               <View style={styles.itemLeft}>
@@ -163,7 +163,7 @@ export const SettingScreen = () => {
             {/* Ngôn ngữ */}
             <TouchableOpacity 
               style={[styles.settingsItem, styles.settingsItemDivider]} 
-              onPress={handleSelectLanguage}
+              onPress={() => navigation.navigate('Language')}
               activeOpacity={0.7}
             >
               <View style={styles.itemLeft}>

@@ -37,6 +37,7 @@ import { NotificationScreen } from '../../features/profile/screens/NotificationS
 import { LanguageScreen } from '../../features/profile/screens/LanguageScreen';
 import { VenueReviewsScreen } from '../../features/venue/screens/VenueReviewsScreen';
 import { FeaturedScreen } from '../../features/home/screens/FeaturedScreen';
+import { CreatePassSanScreen } from '../../features/home/screens/CreatePassSanScreen';
 import { Ionicons } from '@expo/vector-icons';
 import {
   RootStackParamList,
@@ -206,6 +207,7 @@ export const AppNavigator = () => {
           <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Language" component={LanguageScreen} options={{ headerShown: false }} />
           <Stack.Screen name="VenueReviews" component={VenueReviewsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="CreatePassSan" component={CreatePassSanScreen} options={{ headerShown: false }} />
         </>
       )}
     </Stack.Navigator>

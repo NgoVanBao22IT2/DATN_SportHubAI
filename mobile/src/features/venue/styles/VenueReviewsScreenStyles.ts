@@ -5,7 +5,7 @@ const TEAL = '#1989a8';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#f8fafc',
   },
   header: {
     backgroundColor: TEAL,
@@ -15,6 +15,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingTop: Platform.OS === 'ios' ? 54 : 14 + (StatusBar.currentHeight || 0),
     gap: 12,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
   },
   backButton: {
     width: 36,
@@ -28,8 +33,10 @@ export const styles = StyleSheet.create({
     color: '#ffffff',
   },
   scrollContent: {
-    paddingBottom: 36,
+    paddingBottom: 40,
   },
+
+  // Venue Info Card
   venueCard: {
     backgroundColor: '#ffffff',
     paddingHorizontal: 16,
@@ -38,12 +45,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
+    borderBottomColor: '#f1f5f9',
   },
   venueImage: {
     width: 64,
     height: 64,
-    borderRadius: 12,
+    borderRadius: 14,
     backgroundColor: '#e5e7eb',
   },
   venueInfo: {
@@ -52,23 +59,28 @@ export const styles = StyleSheet.create({
   },
   venueName: {
     fontSize: 18,
-    fontWeight: '700',
-    color: '#1f2937',
+    fontWeight: '800',
+    color: '#0f172a',
   },
   venueAddressRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 4,
   },
   venueAddress: {
-    fontSize: 13,
-    color: '#6b7280',
+    fontSize: 12,
+    color: '#64748b',
     flex: 1,
+    lineHeight: 16,
   },
+
+  // Rating Overview Card
   ratingOverviewCard: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
-    margin: 16,
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 8,
     padding: 16,
     flexDirection: 'row',
     shadowColor: '#000',
@@ -77,28 +89,31 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#f1f5f9',
   },
   ratingLeft: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1.1,
     borderRightWidth: 1,
-    borderRightColor: '#f3f4f6',
+    borderRightColor: '#f1f5f9',
     paddingRight: 12,
   },
   ratingScore: {
-    fontSize: 36,
-    fontWeight: '800',
-    color: '#1f2937',
+    fontSize: 38,
+    fontWeight: '900',
+    color: '#0f172a',
   },
   starsRow: {
     flexDirection: 'row',
-    gap: 2,
+    gap: 3,
     marginVertical: 4,
   },
   ratingCountText: {
     fontSize: 12,
-    color: '#9ca3af',
+    color: '#94a3b8',
+    fontWeight: '500',
   },
   ratingRight: {
     flex: 1.5,
@@ -108,20 +123,20 @@ export const styles = StyleSheet.create({
   progressBarRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
   },
   barLabel: {
-    fontSize: 12,
-    color: '#4b5563',
+    fontSize: 11,
+    color: '#64748b',
     fontWeight: '600',
-    width: 10,
+    width: 8,
     textAlign: 'center',
   },
   barTrack: {
     flex: 1,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#f1f5f9',
     overflow: 'hidden',
   },
   barFill: {
@@ -131,63 +146,80 @@ export const styles = StyleSheet.create({
   },
   barCount: {
     fontSize: 11,
-    color: '#9ca3af',
-    width: 22,
+    color: '#94a3b8',
+    width: 24,
     textAlign: 'right',
   },
+
+  // Section Headers
   sectionTitleRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    marginTop: 8,
-    marginBottom: 12,
+    marginTop: 16,
+    marginBottom: 10,
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#1f2937',
+    fontWeight: '800',
+    color: '#0f172a',
   },
   seeAllText: {
     fontSize: 13,
-    color: '#1989a8',
-    fontWeight: '600',
+    color: TEAL,
+    fontWeight: '700',
   },
-  categoriesContainer: {
-    paddingLeft: 16,
-    paddingRight: 8,
-    marginBottom: 20,
-  },
-  categoryBox: {
+
+  // Category Cards Grid Wrapper
+  categoriesContainer: { paddingLeft: 16, paddingRight: 8, marginBottom: 20 },
+  categoryBox: { backgroundColor: '#ffffff', borderRadius: 12, padding: 10, alignItems: 'center', marginRight: 10, width: 76, gap: 6 },
+  categoryCardWrapper: {
     backgroundColor: '#ffffff',
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    borderRadius: 16,
+    marginHorizontal: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 6,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10,
-    width: 76,
+    justifyContent: 'space-around',
     borderWidth: 1,
-    borderColor: '#f3f4f6',
+    borderColor: '#f1f5f9',
+    shadowColor: '#000',
+    shadowOpacity: 0.03,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 1,
+  },
+  categoryBoxItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 6,
+    flex: 1,
   },
   categoryLabel: {
     fontSize: 10,
-    color: '#6b7280',
+    color: '#64748b',
+    fontWeight: '600',
     textAlign: 'center',
   },
   categoryScore: {
     fontSize: 13,
-    fontWeight: '700',
-    color: '#1f2937',
+    fontWeight: '800',
+    color: '#0f172a',
   },
+
+  // Reviews List
   reviewsList: {
     paddingHorizontal: 16,
-    gap: 16,
+    gap: 14,
   },
   reviewCard: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 16,
+    borderWidth: 1,
+    borderColor: '#f1f5f9',
     shadowColor: '#000',
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 2 },
@@ -196,38 +228,37 @@ export const styles = StyleSheet.create({
   },
   reviewHeader: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+  reviewMeta: { alignItems: 'flex-end', gap: 2 },
   reviewerInfo: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
   reviewerAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 42,
+    height: 42,
+    borderRadius: 21,
     backgroundColor: '#e5e7eb',
   },
   reviewerName: {
     fontSize: 14,
-    fontWeight: '700',
-    color: '#1f2937',
-  },
-  reviewMeta: {
-    alignItems: 'flex-end',
-    gap: 2,
+    fontWeight: '800',
+    color: '#0f172a',
   },
   reviewDate: {
     fontSize: 11,
-    color: '#9ca3af',
+    color: '#0284c7',
+    fontWeight: '600',
   },
   reviewComment: {
     fontSize: 13,
-    lineHeight: 18,
-    color: '#4b5563',
+    lineHeight: 19,
+    color: '#334155',
+    fontWeight: '500',
     marginBottom: 12,
   },
   photoRow: {
@@ -237,25 +268,27 @@ export const styles = StyleSheet.create({
   reviewPhoto: {
     flex: 1,
     aspectRatio: 1,
-    borderRadius: 8,
-    backgroundColor: '#f3f4f6',
+    borderRadius: 10,
+    backgroundColor: '#f1f5f9',
   },
+
+  // Write Review Button
   writeReviewBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
     borderWidth: 1.5,
     borderColor: TEAL,
-    borderRadius: 12,
+    borderRadius: 14,
     height: 48,
     marginHorizontal: 16,
-    marginTop: 24,
-    gap: 8,
+    marginTop: 20,
     backgroundColor: '#ffffff',
   },
   writeReviewText: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '800',
     color: TEAL,
   },
 });

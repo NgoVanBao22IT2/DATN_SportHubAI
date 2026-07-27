@@ -162,6 +162,7 @@ export type RootStackParamList = {
     courtCount?: number;
     imageUrl?: string;
   };
+  CreatePassSan: undefined;
 };
 
 // Mở rộng namespace để sử dụng hook navigation một cách typesafe trong toàn dự án

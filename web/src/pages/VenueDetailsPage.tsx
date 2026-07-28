@@ -21,7 +21,10 @@ import {
   Sparkles,
   Car,
   Square,
-  Edit3
+  Edit3,
+  X,
+  ArrowRight,
+  Scissors
 } from 'lucide-react';
 import { type Venue } from '../types/venue';
 
@@ -42,11 +45,16 @@ export const VenueDetailsPage: React.FC<VenueDetailsPageProps> = ({
   onSelectVenueForBooking,
   onNavigateHome,
 }) => {
-  const [activeSubTab, setActiveSubTab] = useState<'thongtin' | 'hinhanh' | 'dichvu' | 'dieukhoan' | 'danhgia'>('danhgia');
+  const [activeSubTab, setActiveSubTab] = useState<'thongtin' | 'hinhanh' | 'dichvu' | 'dieukhoan' | 'danhgia'>('thongtin');
   
   // Pricing Day Toggle States
   const [dayFilterGeneral, setDayFilterGeneral] = useState<'t2t6' | 't7cn'>('t2t6');
   const [dayFilterStudent, setDayFilterStudent] = useState<'t2t6' | 't7cn'>('t2t6');
+
+  // Audience & Booking Type Selection Modal States
+  const [showAudienceModal, setShowAudienceModal] = useState(false);
+  const [showBookingTypeModal, setShowBookingTypeModal] = useState(false);
+
 
   return (
     <div>
@@ -86,7 +94,7 @@ export const VenueDetailsPage: React.FC<VenueDetailsPageProps> = ({
           <div className="venue-floating-actions">
             <button
               className="btn-venue-action-primary"
-              onClick={() => onSelectVenueForBooking(venue)}
+              onClick={() => setShowAudienceModal(true)}
             >
               <Calendar size={18} />
               <span>Đặt lịch</span>
@@ -762,6 +770,123 @@ export const VenueDetailsPage: React.FC<VenueDetailsPageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* MODAL: Chọn đối tượng */}
+      {showAudienceModal && (
+        <div className="audience-modal-overlay" onClick={() => setShowAudienceModal(false)}>
+          <div className="audience-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="audience-modal-close" onClick={() => setShowAudienceModal(false)}>
+              <X size={16} />
+            </button>
+            <h2 className="audience-modal-title">Chọn đối tượng</h2>
+
+            <div className="audience-option-list">
+              {/* Option 1: Giá chung */}
+              <div
+                className="audience-option-item"
+                onClick={() => {
+                  setShowAudienceModal(false);
+                  setShowBookingTypeModal(true);
+                }}
+              >
+                <div className="audience-option-icon general">
+                  <CreditCard size={20} />
+                </div>
+                <span className="audience-option-text">Giá chung</span>
+                <div className="audience-option-arrow general">
+                  <ArrowRight size={18} />
+                </div>
+              </div>
+
+              {/* Option 2: Học sinh - Sinh viên */}
+              <div
+                className="audience-option-item student"
+                onClick={() => {
+                  setShowAudienceModal(false);
+                  setShowBookingTypeModal(true);
+                }}
+              >
+                <div className="audience-option-icon student">
+                  <Scissors size={20} />
+                </div>
+                <span className="audience-option-text">Học sinh - Sinh viên</span>
+                <div className="audience-option-arrow student">
+                  <ArrowRight size={18} />
+                </div>
+              </div>
+            </div>
+
+            <p className="audience-hotline-text">
+              Hỗ trợ đặt nhanh chóng qua Hotline: <span>1900 xxxx</span>
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: Chọn hình thức đặt */}
+      {showBookingTypeModal && (
+        <div className="audience-modal-overlay" onClick={() => setShowBookingTypeModal(false)}>
+          <div className="audience-modal-card" style={{ maxWidth: '480px' }} onClick={(e) => e.stopPropagation()}>
+            <button className="audience-modal-close" onClick={() => setShowBookingTypeModal(false)}>
+              <X size={16} />
+            </button>
+            <h2 className="audience-modal-title">Chọn hình thức đặt</h2>
+
+            <div className="audience-option-list">
+              {/* Option 1: Đặt lịch ngày */}
+              <div
+                className="booking-type-option-item"
+                onClick={() => {
+                  setShowBookingTypeModal(false);
+                  onSelectVenueForBooking(venue);
+                }}
+              >
+                <div className="booking-type-icon daily">
+                  <Calendar size={22} />
+                </div>
+                <div className="booking-type-content">
+                  <div className="booking-type-title">Đặt lịch ngày</div>
+                  <div className="booking-type-subtitle">
+                    Chọn giờ theo ô dưới, dễ dàng xem khoảng trống trong ngày.
+                  </div>
+                </div>
+                <div className="booking-type-arrow daily">
+                  <ArrowRight size={18} />
+                </div>
+              </div>
+
+              {/* Option 2: Đặt lịch sự kiện */}
+              <div
+                className="booking-type-option-item event"
+                onClick={() => {
+                  setShowBookingTypeModal(false);
+                  onSelectVenueForBooking(venue);
+                }}
+              >
+                <div className="badge-new">
+                  <span>★ New</span>
+                </div>
+                <div className="booking-type-icon event">
+                  <Calendar size={22} />
+                </div>
+                <div className="booking-type-content">
+                  <div className="booking-type-title">Đặt lịch sự kiện</div>
+                  <div className="booking-type-subtitle">
+                    Dành cho các giải đấu, sự kiện dài ngày hoặc đặt cố định theo tháng.
+                  </div>
+                </div>
+                <div className="booking-type-arrow event">
+                  <ArrowRight size={18} />
+                </div>
+              </div>
+            </div>
+
+            <p className="audience-hotline-text">
+              Hỗ trợ đặt nhanh chóng qua Hotline: <span>1900 xxxx</span>
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

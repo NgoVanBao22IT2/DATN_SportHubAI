@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, X } from 'lucide-react';
+import logoBadminton from '../assets/logo-badminton.png';
 
 interface NavbarProps {
   activeNavTab: 'home' | 'datsan' | 'khampha' | 'bando' | 'noibat';
@@ -122,9 +123,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <header className="navbar">
         <div className="container navbar-inner">
           <div className="logo-group" onClick={() => setActiveNavTab('home')}>
-            <div className="logo-icon-wrap">
-              <span style={{ fontSize: '20px' }}>🏸</span>
-            </div>
+            <img
+              src={logoBadminton}
+              alt="Logo badminton"
+              className="logo-badminton"
+            />
             <span className="logo-text">
               SportHub<span>AI</span>
             </span>

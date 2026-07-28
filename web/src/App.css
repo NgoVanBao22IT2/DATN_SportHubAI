@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(12, 45, 55, 0.45);
+  background: #1A8AA9;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -25,16 +25,13 @@
   cursor: pointer;
 }
 
-.logo-icon-wrap {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #1989a8, #06b6d4);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(25, 137, 168, 0.4);
+.logo-badminton {
+  width: 40.86px;
+  height: 44.79px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  object-fit: contain;
 }
 
 .logo-text {
@@ -45,7 +42,7 @@
 }
 
 .logo-text span {
-  color: #38bdf8;
+  color: #29EEAC;
 }
 
 .nav-links {
@@ -64,7 +61,7 @@
 }
 
 .nav-link:hover, .nav-link.active {
-  color: #ffffff;
+  color: #29EEAC;
 }
 
 .nav-link.active::after {
@@ -74,7 +71,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #38bdf8;
+  background: #29EEAC;
   border-radius: 2px;
 }
 
@@ -101,7 +98,7 @@
 
 .btn-register {
   background: var(--accent-orange);
-  color: #ffffff;
+  color: #664f04;
   padding: 8px 20px;
   border-radius: var(--radius-full);
   font-size: 14px;
@@ -2173,6 +2170,268 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   AUDIENCE SELECTION MODAL ("Chọn đối tượng")
+───────────────────────────────────────────────────────────── */
+.audience-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.audience-modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px 28px 28px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+.audience-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.audience-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.audience-modal-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+.audience-option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.audience-option-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 2px solid #1A8AA9;
+  background: #f0f9ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.audience-option-item:hover {
+  border-color: #4ab5d2;
+  background: #f0f9ff;
+  transform: translateX(4px);
+}
+
+.audience-option-item.student {
+  border-color: #915777;
+  background: #fcecf5;
+}
+
+.audience-option-item.student:hover {
+  border-color: #d568a4;
+  background: #fcecf5;
+}
+
+.audience-option-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.audience-option-icon.general {
+  background: #1A8AA9;
+  color: #cfdee3;
+}
+
+.audience-option-icon.student {
+  background: #71435C;
+  color: #ffffff;
+}
+
+.audience-option-text {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.audience-option-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.audience-option-arrow.general {
+  background: #1A8AA9;
+  color: #ffffff;
+}
+
+.audience-option-arrow.student {
+  background: #71435C;
+  color: #ffffff;
+}
+
+.audience-hotline-text {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.audience-hotline-text span {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BOOKING TYPE SELECTION MODAL ("Chọn hình thức đặt")
+───────────────────────────────────────────────────────────── */
+.booking-type-option-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 2px solid #1A8AA9;
+  background: #e0f2fe;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.booking-type-option-item:hover {
+  border-color: #1A8AA9;
+  background: #e0f2fe;
+  transform: translateX(4px);
+}
+
+.booking-type-option-item.event {
+  border-color: #71435C;
+  background: #fdf2f8;
+}
+
+.booking-type-option-item.event:hover {
+  border-color: #d568a4;
+  background: #fdf2f8;
+}
+
+.booking-type-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.booking-type-icon.daily {
+  background: #1A8AA9;
+  color: #ffffff;
+}
+
+.booking-type-icon.event {
+  background: #71435C;
+  color: #ffffff;
+}
+
+.booking-type-content {
+  flex: 1;
+}
+
+.booking-type-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.booking-type-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.badge-new {
+  background: #f59e0b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  position: absolute;
+  top: -8px;
+  right: 0px;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+}
+
+.booking-type-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.booking-type-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.booking-type-arrow.daily {
+  background: #1A8AA9;
+  color: #ffffff;
+}
+
+.booking-type-arrow.event {
+  background: #71435C;
+  color: #ffffff;
+}
+
+
 
 
 

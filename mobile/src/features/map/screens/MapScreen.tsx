@@ -230,8 +230,8 @@ export const MapScreen = () => {
   }, []);
 
   const handleNotificationPress = useCallback(() => {
-    Alert.alert('Thông báo', 'Chức năng thông báo sẽ được cập nhật sau.');
-  }, []);
+    navigation.navigate('Notification');
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

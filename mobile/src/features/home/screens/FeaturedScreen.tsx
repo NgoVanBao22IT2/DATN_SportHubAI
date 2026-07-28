@@ -1053,7 +1053,8 @@ export const FeaturedScreen = () => {
         </View>
         <TouchableOpacity
           style={styles.headerBell}
-          onPress={() => Alert.alert('Thông báo', 'Bạn có 3 thông báo mới.')}
+          onPress={() => navigation.navigate('Notification')}
+          activeOpacity={0.8}
         >
           <Ionicons name="notifications-outline" size={24} color="#ffffff" />
         </TouchableOpacity>

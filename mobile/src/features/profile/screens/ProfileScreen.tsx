@@ -92,9 +92,13 @@ export const ProfileScreen = () => {
       {/* Header: Logo + Settings icon only */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Image source={require('../../../../assets/image.png')} style={styles.logoIcon} resizeMode="contain" />
-          <Text style={styles.logoText}>SportHub</Text>
-        </View>
+                  <Image
+                    source={require('../../../../assets/image.png')}
+                    style={styles.logoIcon}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.logoText}>SportHub</Text>
+                </View>
         <TouchableOpacity style={styles.topIconButton} onPress={() => navigation.navigate('Setting')}>
           <Ionicons name="settings-outline" size={24} color="#ffffff" />
         </TouchableOpacity>
